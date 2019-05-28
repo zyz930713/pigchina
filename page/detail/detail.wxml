@@ -1,0 +1,23 @@
+<!--page/detail/detail.wxml-->
+<view class='container'>
+  <view class='player-box'>
+    <view class='player-content'>
+      <video id='myVideo' src='{{detailInfo.film_url}}'></video>
+    </view>
+    <view class='player-introduce'>
+      <text>作品： {{detailInfo.goods_name}}</text>
+      <text>导演： {{detailInfo.producer}}</text>
+      <text>制片人： {{detailInfo.producer}}</text>
+    </view>
+  </view>
+  <view class='recommand-box'>
+    <text>相关推荐</text>
+    <view class='recommand-content'>
+      <view class='recommand-item' wx:for="{{relatedList}}" wx:key="*this">
+        <video id='relateVideo' src='{{item.film_url}}'></video>
+      </view>
+    </view>
+  </view>
+</view>
+<i-toast id="toast" />
+

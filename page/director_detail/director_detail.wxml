@@ -1,0 +1,53 @@
+<!--page/director_detail/director_detail.wxml-->
+<view class='container'>
+  <view class='director_introduce'>
+    <view class="director_introduce_title" wx:if="{{language == 'zh'}}">{{detailInfo.director_name}}</view>
+    <view class="director_introduce_title" wx:if="{{language == 'en'}}">{{detailInfo.en_director_name}}</view>
+    <view 
+      class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}'
+      wx:if="{{language == 'zh'}}"
+    >
+     {{detailInfo.content}}
+    </view>
+     <view 
+      class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}'
+      wx:if="{{language == 'en'}}"
+    >
+     {{detailInfo.en_content}}
+    </view>
+    <view class='change-tab arrow-down' bindtap='textToggle' wx:if="{{textHidden}}">{{content.unfold}}</view>
+    <view class='change-tab arrow-up' bindtap='textToggle' wx:if="{{!textHidden}}">{{content.packUp}}</view>
+  </view>
+  <view class='director_works'>
+      <swiper 
+        previous-margin="{{'90rpx'}}"
+        next-margin="{{'230rpx'}}"
+        current='{{swiperCurrent}}' 
+        indicator-dots="{{indicatorDots}}" 
+        autoplay="{{autoplay}}" 
+        interval="{{interval}}" 
+        duration="{{duration}}" 
+        circular='true'
+        bindchange='swiperChange'
+      >
+    <block wx:for="{{imgUrls}}" wx:key="*this">
+      <swiper-item 
+        class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} ">
+        <image 
+          src="{{item}}" 
+          class="slide-image {{ index==swiperCurrent ? 'active' : '' }}" 
+          bindchange="chuangEvent" 
+          data-index="{{index}}"
+          id="{{index}}"
+          mode='aspectFit'
+        />
+      </swiper-item>
+    </block>
+    
+  </swiper>
+  <view class='director_works_title'>KDKD  HEALRH</view>
+  </view>
+</view>
+
+<i-toast id="toast" />
+

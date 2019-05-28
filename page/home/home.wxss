@@ -1,0 +1,100 @@
+/* page/home/home.wxss */
+page{
+  overflow: visible;
+}
+
+.navbar{
+  width: 80%;
+  margin-left:10%;
+  margin-top:20rpx;
+  flex: none;
+  display: flex;
+}
+.navbar .item{
+  position: relative;
+  font-size: 32rpx;
+  flex: auto;
+  color:#999999;
+  text-align: center;
+  line-height: 80rpx;
+  min-width: 50rpx;
+}
+.navbar .item.tab_active{
+  color: #00A0E9;
+}
+.navbar .item.tab_active::after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom:0;
+  left: 0;
+  right: 0;
+  height: 1rpx;
+  background: #00A0E9;
+} 
+
+.banner-swiper{
+  margin-top: 6%;
+}
+
+swiper{
+  width: 750rpx;
+  height: 900rpx;
+  z-index: 99
+}
+
+swiper-item{
+  position: relative;
+}
+
+.slide-image{
+  width: 500rpx;
+  height: 300rpx;
+  position: absolute;
+  left: 120rpx;
+  border-radius:36rpx;
+  /* margin-left: -188rpx; */
+}
+
+.slide-swiper{
+  z-index: 99!important;
+  overflow: visible!important;
+}
+.swiperActive{
+  /* height: 120%!important; */
+  z-index: 999!important;
+}
+
+.active{
+  transform: scale(1.38,1.68);
+  transition:all .2s ease-in 0s;
+  /* overflow: visible!important; */
+}
+
+/* 选中图片的前后位置的样式 */
+.secend_active{
+
+}
+
+.player-icon{
+  position: absolute;
+  top: 24%;
+  left: 39%;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.no-info{
+  position: fixed;
+  left: 40%;
+  bottom: 20%;
+}
+
+.lang-change{
+  width: 200rpx;
+  height: 30rpx;
+  margin-left: 560rpx;
+  font-size: 28rpx;
+  color: #444;
+  font-weight: 600;
+}

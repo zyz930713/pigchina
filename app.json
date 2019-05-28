@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "page/home/home",
+    "page/contact/contact",
+    "page/ours/ours",
+    "page/detail/detail",
+    "page/director/director",
+    "page/director_detail/director_detail"
+  ],
+  "tabBar": {
+    "custom": true,
+    "color": "#fff",
+    "selectedColor": "#fff",
+    "borderStyle": "black",
+    "backgroundColor": "#000",
+    "list": [
+      {
+        "pagePath": "page/contact/contact",
+        "iconPath": "image/home/contact_icon.png",
+        "selectedIconPath": "image/contact/contact_select.png",
+        "text": "联系"
+      },
+      {
+        "pagePath": "page/home/home",
+        "iconPath": "image/home/home_icon.png",
+        "selectedIconPath": "image/home/home_icon.png"
+      },
+      {
+        "pagePath": "page/ours/ours",
+        "iconPath": "image/home/ours_icon.png",
+        "selectedIconPath": "image/ours/ours_select.png",
+        "text": "我们"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "P.I.G CHINA  ",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+ "usingComponents": {
+  "i-toast": "../../dist/toast/index",
+  "i-load-more": "../../dist/load-more/index"
+}
+}
