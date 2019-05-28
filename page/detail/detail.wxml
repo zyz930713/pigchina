@@ -5,13 +5,20 @@
       <video id='myVideo' src='{{detailInfo.film_url}}'></video>
     </view>
     <view class='player-introduce'>
-      <text>作品： {{detailInfo.goods_name}}</text>
-      <text>导演： {{detailInfo.producer}}</text>
-      <text>制片人： {{detailInfo.producer}}</text>
-    </view>
+      <text wx:if="{{language == 'zh'}}">{{content.production}}：{{detailInfo.goods_name}}</text>
+      <text wx:if="{{language == 'en'}}">{{content.production}}：{{detailInfo.en_goods_name}}</text>
+      <text wx:if="{{language == 'zh'}}">
+        {{content.director}}: {{detailInfo.director.director_name}}
+      </text>
+      <text wx:if="{{language == 'en'}}">
+        {{content.director}}: {{detailInfo.director.en_director_name}}
+      </text>
+      <text wx:if="{{language == 'zh'}}">{{content.filmProducer}}：{{detailInfo.producer}}</text>
+      <text wx:if="{{language == 'en'}}">{{content.filmProducer}}：{{detailInfo.en_producer}}</text>
+    </view> 
   </view>
   <view class='recommand-box'>
-    <text>相关推荐</text>
+    <text>{{content.related}}</text>
     <view class='recommand-content'>
       <view class='recommand-item' wx:for="{{relatedList}}" wx:key="*this">
         <video id='relateVideo' src='{{item.film_url}}'></video>

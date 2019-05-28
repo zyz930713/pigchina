@@ -3,9 +3,9 @@
     <image src='../../image/ours/logo.png'></image>
   </view>
   <view class='aboutUs-des'>
-    <view class='aboutUs-des_header'>关于我们</view>
+    <view class='aboutUs-des_header'>{{content.aboutUs}}</view>
     <view class='aboutUs-des_content'>
-    
+
     </view>
   </view>
   <view class='aboutUs-contact'>

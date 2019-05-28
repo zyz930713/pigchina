@@ -64,6 +64,7 @@
           src='../../image/home/player.png'
           wx:if="{{index==swiperCurrent}}"
           data-index="{{index}}"
+          data-id="{{item.goods_id}}"
           class='player-icon'
           catchtap='checkTab'
         />
@@ -74,6 +75,6 @@
 </view>
 <!-- <i-load-more tip="暂无数据" wx:if="{{goodsList.length < 1}}" /> -->
 <view class='no-info' wx:if="{{goodsList.length < 1}}">
-  暂无数据
+  {{content.noData}}
 </view>
 <i-toast id="toast" />

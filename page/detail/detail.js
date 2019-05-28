@@ -1,6 +1,10 @@
 // page/detail/detail.js
 
-import http from "../../http/http.js"
+import http from "../../http/http.js";
+import chinese from "../../utils/chinese.js";
+import english from "../../utils/english.js";
+
+let app = getApp();
 
 
 Page({
@@ -9,6 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    language: "",
+    content: "", //自定义字段
     // recommandList: [1,2,3,3]
     detailInfo: {}, //电影详情
     relatedList: [], //相关推荐
@@ -19,6 +25,31 @@ Page({
    */
   onLoad: function (options) {
     this.getGoodsLists(options.goods_id)
+  },
+
+  onShow(){
+    this.setData({
+      language: app.lang
+    })
+    let lastLang = this.data.language;
+    this.getContent(lastLang);
+  },
+
+  //获取选择语言的字段
+  getContent(lastLang) {
+    let t = this
+    if (lastLang == "zh") {
+      console.log("zh")
+      t.setData({
+        content: chinese.content
+      })
+    }
+    else if (lastLang == "en") {
+      console.log("en")
+      t.setData({
+        content: english.content
+      })
+    }
   },
 
   //获取电影详情

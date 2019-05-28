@@ -61,7 +61,10 @@ Page({
       },
       url: "Director/detail",
       success: function (res) {
-        detailInfo = res.data.data
+        detailInfo = res.data.data;
+        detailInfo.list.forEach( ele => {
+          ele['imgUrl'] = ele.film_url + '?vframe/jpg/offset/2'
+        } )
         that.setData({
           detailInfo,
           language: app.lang
@@ -105,6 +108,19 @@ Page({
     this.setData({
       swiperCurrent: e.currentTarget.id
     })
+  },
+
+  //点击选中图片跳转详情
+  checkTab(e) {
+    let checkIndex = e.currentTarget.dataset.index;
+    let goods_id = e.currentTarget.dataset.id;
+    let swiperCurrent = this.data.swiperCurrent;
+    if (swiperCurrent == checkIndex) {
+      wx.navigateTo({
+        url: '../detail/detail?goods_id=' + goods_id,
+      })
+    }
+    else return;
   },
 
   //切换文本显示隐藏

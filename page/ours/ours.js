@@ -1,6 +1,10 @@
 
 
-import http from "../../http/http.js"
+import http from "../../http/http.js";
+import chinese from "../../utils/chinese.js";
+import english from "../../utils/english.js";
+
+let app = getApp();
 
 
 
@@ -10,6 +14,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    language: "",
+    content: "", //自定义字段
     configInfo: {}, //配置信息 
   },
 
@@ -18,6 +24,36 @@ Page({
    */
   onLoad: function (options) {
     this.getConfig();
+    this.setData({
+      language: app.lang
+    })
+    let lastLang = this.data.language;
+    this.getContent(lastLang);
+  },
+
+  onShow() {
+    this.setData({
+      language: app.lang
+    })
+    let lastLang = this.data.language;
+    this.getContent(lastLang);
+
+  },
+
+  //获取选择语言的字段
+  getContent(lastLang) {
+    let t = this
+    if (lastLang == "zh") {
+      
+      t.setData({
+        content: chinese.content
+      })
+    }
+    else if (lastLang == "en") {
+      t.setData({
+        content: english.content
+      })
+    }
   },
 
   //获取配置信息

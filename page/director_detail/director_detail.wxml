@@ -1,19 +1,19 @@
 <!--page/director_detail/director_detail.wxml-->
 <view class='container'>
   <view class='director_introduce'>
-    <view class="director_introduce_title" wx:if="{{language == 'zh'}}">{{detailInfo.director_name}}</view>
-    <view class="director_introduce_title" wx:if="{{language == 'en'}}">{{detailInfo.en_director_name}}</view>
+    <view class="director_introduce_title" wx:if="{{language == 'zh'}}">{{detailInfo.detail.director_name}}</view>
+    <view class="director_introduce_title" wx:if="{{language == 'en'}}">{{detailInfo.detail.en_director_name}}</view>
     <view 
       class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}'
       wx:if="{{language == 'zh'}}"
     >
-     {{detailInfo.content}}
+     {{detailInfo.detail.content}}
     </view>
      <view 
       class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}'
       wx:if="{{language == 'en'}}"
     >
-     {{detailInfo.en_content}}
+     {{detailInfo.detail.en_content}}
     </view>
     <view class='change-tab arrow-down' bindtap='textToggle' wx:if="{{textHidden}}">{{content.unfold}}</view>
     <view class='change-tab arrow-up' bindtap='textToggle' wx:if="{{!textHidden}}">{{content.packUp}}</view>
@@ -30,22 +30,25 @@
         circular='true'
         bindchange='swiperChange'
       >
-    <block wx:for="{{imgUrls}}" wx:key="*this">
+    <block wx:for="{{detailInfo.list}}" wx:key="*this">
       <swiper-item 
         class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} ">
         <image 
-          src="{{item}}" 
+          src="{{item.imgUrl}}" 
           class="slide-image {{ index==swiperCurrent ? 'active' : '' }}" 
           bindchange="chuangEvent" 
           data-index="{{index}}"
           id="{{index}}"
+          data-id="{{item.goods_id}}"
           mode='aspectFit'
+          bindtap='checkTab'
         />
       </swiper-item>
+      <view class='director_works_title'>KDKD  HEALRH</view>
     </block>
     
   </swiper>
-  <view class='director_works_title'>KDKD  HEALRH</view>
+  
   </view>
 </view>
 
