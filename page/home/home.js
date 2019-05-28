@@ -76,18 +76,11 @@ Page({
   changeLang() {
     let version = this.data.language;
     if (version == "zh") {
-      // this.setData({
-      //   language: "en"
-      // })
       app.lang = "en"
     }
     else {
-      // this.setData({
-      //   language: "zh"
-      // })
       app.lang = "zh"
     }
-    // this.getContent(version)
     this.onLoad()
   },
 
@@ -118,7 +111,10 @@ Page({
       url: "Goods/lists",
       success: function (res) {
         goodsList = res.data.data.data;
-        console.log(res)
+        goodsList.forEach( ele => {
+          ele['img_url'] = ele.film_url + '?vframe/jpg/offset/2';
+        } )
+        // console.log(res)
         that.setData({
           goodsList
         })

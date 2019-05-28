@@ -50,9 +50,9 @@
     <block wx:for="{{goodsList}}" wx:key="unique">
       <swiper-item 
         class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secend_active' : ''  }}">
-        <video 
-          src="{{item.film_url}}" 
-          bindplay="startPlay"
+        <image 
+          src="{{item.img_url}}" 
+
           class="slide-image {{ index==swiperCurrent ? 'active' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secendImg_active' : ''  }}" 
           bindchange="chuangEvent" 
           bindtap='checkTab'
@@ -60,13 +60,13 @@
           data-id="{{item.goods_id}}"
           id="{{index}}"
         />
-        <!-- <image 
+        <image 
           src='../../image/home/player.png'
           wx:if="{{index==swiperCurrent}}"
           data-index="{{index}}"
           class='player-icon'
           catchtap='checkTab'
-        /> -->
+        />
       </swiper-item>
       <!-- <image class='player-icon' src='../image/home/player.png'></image> -->
     </block>

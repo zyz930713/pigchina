@@ -10,7 +10,7 @@ Component({
     language: "",
     content: "", //自定义字段
 
-    selected: 1,
+    selected: 0,
     color: "#fff",
     selectedColor: "#fff",
     list: [{
