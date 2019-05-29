@@ -134,9 +134,15 @@ Page({
 
   //轮播图的切换事件 
   swiperChange: function (e) {
-    this.setData({
-      swiperCurrent: e.detail.current  //获取当前轮播图片的下标
-    })
+    console.log(e.detail.source);
+    if (e.detail.source == "touch"){
+      this.setData({
+        swiperCurrent: e.detail.current  //获取当前轮播图片的下标
+      })
+    }
+    else {
+      return false;
+    }
   },
 
   //滑动图片切换 

@@ -1,6 +1,6 @@
 <view class="container">
   <view class='search-box'>
-    <input value='{{keywords}}' bindinput='bindinput' auto-focus></input>
+    <input value='{{keywords}}' bindinput='bindinput'></input>
     <text catchtap='toSearch'>{{content.search}}</text>
     <image class='search_icon' src='../../image/contact/search_icon.png'></image>
     <image class='delete_icon' src='../../image/contact/delete_icon.png' bindtap='resetSearch'></image>

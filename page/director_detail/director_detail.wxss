@@ -7,7 +7,7 @@
 }
 .director_introduce_title{
   font-size: 36rpx;
-  color: #444;
+  color: #fff;
   margin-bottom: 40rpx;
 }
 .director_introduce_content{

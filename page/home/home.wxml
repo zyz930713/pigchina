@@ -49,7 +49,7 @@
   >
     <block wx:for="{{goodsList}}" wx:key="unique">
       <swiper-item 
-        class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secend_active' : ''  }}">
+        class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secend_active' : ''  }}" >
         <image 
           src="{{item.img_url}}" 
           class="slide-image {{ index==swiperCurrent ? 'active' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secendImg_active' : ''  }}" 

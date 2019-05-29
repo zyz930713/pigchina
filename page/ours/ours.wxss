@@ -1,10 +1,3 @@
-page{
-  background: url("http://cdn.zjwoo.com/film/background.png") no-repeat;
-  background-size: cover;
-  background-position-x: -380rpx;
-  background-position-y: -66rpx;
-  padding-bottom: 50rpx
-}
 
 .container {
   padding: 30rpx 20rpx;

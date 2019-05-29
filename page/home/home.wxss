@@ -35,7 +35,7 @@ page{
 } 
 
 .banner-swiper{
-  margin-top: 6%;
+  margin-top: 5%;
 }
 
 swiper{
@@ -68,7 +68,7 @@ swiper-item{
 
 .active{
   transform: scale(1.38,1.68);
-  transition:all .2s ease-in 0s;
+  transition:all .2s ease-in .1s;
   /* overflow: visible!important; */
 }
 
@@ -97,6 +97,7 @@ swiper-item{
   width: 200rpx;
   height: 30rpx;
   margin-left: 560rpx;
+  padding-top: 16rpx;
   font-size: 28rpx;
   color: #fff;
   font-weight: 600;
