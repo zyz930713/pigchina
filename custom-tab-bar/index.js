@@ -14,7 +14,7 @@ Component({
     color: "#fff",
     selectedColor: "#fff",
     list: [{
-      pagePath: "/page/contact/contact",
+      pagePath: "/page/director/director",
       iconPath: "/image/home/contact_icon.png",
       selectedIconPath: "/image/contact/contact_select.png",
       text: "" 

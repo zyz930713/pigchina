@@ -1,11 +1,11 @@
 {
   "pages": [
     "page/home/home",
-    "page/contact/contact",
     "page/ours/ours",
     "page/detail/detail",
     "page/director/director",
-    "page/director_detail/director_detail"
+    "page/director_detail/director_detail",
+    "page/ours/contact_us"
   ],
   "tabBar": {
     "custom": true,
@@ -15,7 +15,7 @@
     "backgroundColor": "#000",
     "list": [
       {
-        "pagePath": "page/contact/contact",
+        "pagePath": "page/director/director",
         "iconPath": "image/home/contact_icon.png",
         "selectedIconPath": "image/contact/contact_select.png",
         "text": "联系"
@@ -40,8 +40,8 @@
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
- "usingComponents": {
-  "i-toast": "../../dist/toast/index",
-  "i-load-more": "../../dist/load-more/index"
-}
+  "usingComponents": {
+    "i-toast": "../../dist/toast/index",
+    "i-load-more": "../../dist/load-more/index"
+  }
 }

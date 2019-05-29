@@ -1,4 +1,8 @@
 page{
-  margin: 0;
-  padding: 0;
+  height: 100%;
+  background: url("http://cdn.zjwoo.com/film/background.png");
+  background-size: cover;
+  background-position-x: -380rpx;
+  background-position-y: -66rpx;
+  padding-bottom: 50rpx
 }

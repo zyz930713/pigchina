@@ -6,7 +6,7 @@ video{
 .player-box{
   width: 100%;
   min-height: 500rpx;
-  background-color: #fff;
+  /* background-color: #fff; */
   border-bottom: 1px solid #e8e8e8;
 }
 .player-content{
@@ -20,7 +20,7 @@ video{
 .player-introduce text{
   display: block;
   text-align: left;
-  color: #999;
+  color: #fff;
   font-size: 26rpx;
   line-height: 42rpx;
 }
@@ -28,7 +28,7 @@ video{
   padding: 30rpx;
 }
 .recommand-box>text{
-  color: #444;
+  color: #fff;
   font-size: 30rpx;
   margin-bottom: 20rpx;
 }

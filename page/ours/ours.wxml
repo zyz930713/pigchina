@@ -4,34 +4,15 @@
   </view>
   <view class='aboutUs-des'>
     <view class='aboutUs-des_header'>{{content.aboutUs}}</view>
-    <view class='aboutUs-des_content'>
-
+    <view class='aboutUs-des_content' wx:if="{{language == 'zh'}}">
+      <text>{{configInfo.aboutus}}</text>
+    </view>
+    <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
+      <text>{{configInfo.en_aboutus}}</text>
     </view>
   </view>
-  <view class='aboutUs-contact'>
-    <view class='aboutUs-contact_header'>联系我们</view>
-    <view class='aboutUs-contact_opt'>
-      <view class='aboutUs-contact_item'>
-        <image src='../../image/ours/mobile.png'></image>
-        <text>{{configInfo.tel}}</text>
-      </view>
-      <view class='aboutUs-contact_item'>
-        <image src='../../image/ours/e-mail.png'></image>
-        <text>{{configInfo.email}}</text>
-      </view>
-      <view class='aboutUs-contact_item'>
-        <image src='../../image/ours/location.png'></image>
-        <text>{{configInfo.address}}</text>
-      </view>
-    </view>
-  </view>
-  <view class='aboutUs-location'>
-    <view class='aboutUs-location_item'>
-      <image src='{{configInfo.image_one_file}}'></image>
-    </view>
-    <view class='aboutUs-location_item'>
-      <image src='{{configInfo.image_two_file}}'></image>
-    </view>
+  <view class='contact-btn'>
+    <button bindtap='toContactUs'>{{content.contactUs}}</button>
   </view>
   
 </view>

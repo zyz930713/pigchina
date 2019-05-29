@@ -6,16 +6,16 @@
 // wx.T = T;
 
 App({
-  onLaunch: function () {
-    let value = wx.getStorageSync('lang');
-    if(value == "") {
-      let res = wx.getSystemInfoSync();
-      this.lang = res.language;
-      console.log(this.lang);
-    }
-  },
+  // onLaunch: function () {
+  //   let value = wx.getStorageSync('lang');
+  //   if(value == "") {
+  //     let res = wx.getSystemInfoSync();
+  //     this.lang = res.language;
+  //     console.log(this.lang);
+  //   }
+  // },
 
-  lang: ""  //语言信息
+  lang: "zh"  //语言信息
 
 
 })

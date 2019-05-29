@@ -43,8 +43,10 @@
           mode='aspectFit'
           bindtap='checkTab'
         />
+         <view class='director_works_title' wx:if="{{language == 'zh'}}">{{item.goods_name}}</view>
+         <view class='director_works_title' wx:if="{{language == 'en'}}">{{item.en_goods_name}}</view>
       </swiper-item>
-      <view class='director_works_title'>KDKD  HEALRH</view>
+     
     </block>
     
   </swiper>

@@ -1,2 +1,26 @@
-<!--page/director/director.wxml-->
-<text>page/director/director.wxml</text>
+<view class="container">
+  <view class='search-box'>
+    <input value='{{keywords}}' bindinput='bindinput' auto-focus></input>
+    <text catchtap='toSearch'>{{content.search}}</text>
+    <image class='search_icon' src='../../image/contact/search_icon.png'></image>
+    <image class='delete_icon' src='../../image/contact/delete_icon.png' bindtap='resetSearch'></image>
+  </view>
+  <view class='director-box'>
+    <view 
+      class='director-item' 
+      wx:for="{{directorList}}"
+      data-id='{{item.director_id}}' 
+      wx:key="*this"
+      bindtap='toDetail'
+    >
+      <view class='director-item_img'>
+        <image src='{{item.image.file_path}}'></image>
+      </view>
+      <text wx:if="{{language == 'zh'}}">{{item.director_name}}</text>
+      <text wx:if="{{language == 'en'}}">{{item.en_director_name}}</text>
+    </view>
+  </view>
+  <i-load-more tip="{{content.noData}}" loading="{{ isHideLoadMore }}" />
+</view>
+
+<i-toast id="toast" />

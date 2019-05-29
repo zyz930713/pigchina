@@ -1,0 +1,35 @@
+<!--page/ours/contact_us.wxml-->
+<view class='container'>
+  <view class='aboutUs-logo'>
+    <image src='../../image/ours/logo.png'></image>
+  </view>
+  <view class='aboutUs-contact'>
+    <view class='aboutUs-contact_header'>{{content.contactUs}}</view>
+    <view class='aboutUs-contact_opt'>
+      <view class='aboutUs-contact_item'>
+        <image src='../../image/ours/mobile.png'></image>
+        <text>{{configInfo.tel}}</text>
+      </view>
+      <view class='aboutUs-contact_item'>
+        <image src='../../image/ours/e-mail.png'></image>
+        <text>{{configInfo.email}}</text>
+      </view>
+      <view class='aboutUs-contact_item' wx:if="{{language == 'zh'}}">
+        <image src='../../image/ours/location.png'></image>
+        <text>{{configInfo.address}}</text>
+      </view>
+      <view class='aboutUs-contact_item' wx:if="{{language == 'en'}}">
+        <image src='../../image/ours/location.png'></image>
+        <text>{{configInfo.en_address}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='aboutUs-location'>
+    <view class='aboutUs-location_item'>
+      <image src='{{configInfo.image_one_file}}'></image>
+    </view>
+    <view class='aboutUs-location_item'>
+      <image src='{{configInfo.image_two_file}}'></image>
+    </view>
+  </view>
+</view>

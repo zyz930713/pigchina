@@ -14,13 +14,14 @@ page{
   position: relative;
   font-size: 32rpx;
   flex: auto;
-  color:#999999;
+  color:#999;
   text-align: center;
   line-height: 80rpx;
   min-width: 50rpx;
 }
 .navbar .item.tab_active{
-  color: #00A0E9;
+  color: #fff;
+  font-weight: 600;
 }
 .navbar .item.tab_active::after{
   content: "";
@@ -88,6 +89,8 @@ swiper-item{
   position: fixed;
   left: 40%;
   bottom: 20%;
+  color: #fff;
+  font-weight: 600;
 }
 
 .lang-change{
@@ -95,6 +98,6 @@ swiper-item{
   height: 30rpx;
   margin-left: 560rpx;
   font-size: 28rpx;
-  color: #444;
+  color: #fff;
   font-weight: 600;
 }

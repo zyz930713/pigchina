@@ -1,25 +1,20 @@
 page{
   background: url("http://cdn.zjwoo.com/film/background.png") no-repeat;
   background-size: cover;
+  background-position-x: -380rpx;
+  background-position-y: -66rpx;
   padding-bottom: 50rpx
 }
 
 .container {
   padding: 30rpx 20rpx;
   text-align: center;
-  /* background-image: url("https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640"); */
   margin-bottom: 180rpx;
 }
-
-
 
 .aboutUs-logo image{
   width: 290rpx;
   height: 60rpx;
-}
-
-.aboutUs-des{
-
 }
 
 .aboutUs-des_header, .aboutUs-contact_header{
@@ -36,33 +31,17 @@ page{
   min-height: 100rpx;
 }
 
-.aboutUs-contact_item{
+.contact-btn{
+  width: 30%;
+  height: 80rpx;
+  margin: 150rpx auto;
+}
+.contact-btn button{
   width: 100%;
-  border-bottom: 1px dotted #fff;
-  overflow: hidden;
-  margin-bottom: 46rpx;
-}
-.aboutUs-contact_item image{
-  width: 42rpx;
-  height: 36rpx;
-  float: left;
-}
-.aboutUs-contact_item text{
-  font-size: 30rpx;
+  height: 70rpx;
+  background-color: red;
   color: #fff;
-  float: right;
-}
-
-.aboutUs-location{
-  width: 100%;
-  margin-top: 80rpx;
-}
-.aboutUs-location_item{
-  width: calc((100% - 40rpx) / 2 );
-  display: inline-block;
-  margin-right: 20rpx
-}
-.aboutUs-location_item image{
-  width: 100%;
-  height: 300rpx;
+  font-size: 32rpx;
+  line-height: 70rpx;
+  border-radius: 32rpx;
 }

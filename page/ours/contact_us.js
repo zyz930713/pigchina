@@ -52,7 +52,7 @@ Page({
   getContent(lastLang) {
     let t = this
     if (lastLang == "zh") {
-      
+
       t.setData({
         content: chinese.content
       })
@@ -81,16 +81,9 @@ Page({
     http.wxRequest(opt)
   },
 
-  //点击跳转到联系我们
-  toContactUs(){
-    wx.navigateTo({
-      url: './contact_us',
-    })
-  }
 
 
 
-  
 })
 
 

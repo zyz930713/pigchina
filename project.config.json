@@ -40,7 +40,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -74,6 +74,13 @@
 					"id": -1,
 					"name": "我们",
 					"pathName": "page/ours/ours",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "导演页",
+					"pathName": "page/director/director",
 					"scene": null
 				}
 			]

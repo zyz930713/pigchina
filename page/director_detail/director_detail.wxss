@@ -57,6 +57,10 @@
     top: 28%;
 }
 .director_works_title{
+  position: absolute;
+  width: 100%;
+  bottom: -6rpx;
+  left: 70rpx;
   color: #aaa; 
   text-align: center;
 }
@@ -69,7 +73,7 @@
 
 swiper{
   width: 750rpx;
-  height: 320rpx;
+  height: 350rpx;
   z-index: 99
 }
 
@@ -94,6 +98,7 @@ swiper-item{
 .slide-swiper{
   z-index: 99!important;
   overflow: visible!important;
+  position: relative;
 }
 
 .active{

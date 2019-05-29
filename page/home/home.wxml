@@ -52,7 +52,6 @@
         class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secend_active' : ''  }}">
         <image 
           src="{{item.img_url}}" 
-
           class="slide-image {{ index==swiperCurrent ? 'active' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secendImg_active' : ''  }}" 
           bindchange="chuangEvent" 
           bindtap='checkTab'
@@ -74,7 +73,7 @@
   </swiper>
 </view>
 <!-- <i-load-more tip="暂无数据" wx:if="{{goodsList.length < 1}}" /> -->
-<view class='no-info' wx:if="{{goodsList.length < 1}}">
+<view class='no-info' wx:if="{{goodsList.length <= 1}}">
   {{content.noData}}
 </view>
 <i-toast id="toast" />
