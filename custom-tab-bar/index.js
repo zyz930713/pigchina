@@ -17,7 +17,8 @@ Component({
       pagePath: "/page/director/director",
       iconPath: "/image/home/contact_icon.png",
       selectedIconPath: "/image/contact/contact_select.png",
-      text: "" 
+      textZh: "导演" ,
+      textEn: "DERECTOR"
     },  
     {
       pagePath: "/page/home/home",
@@ -28,26 +29,9 @@ Component({
       pagePath: "/page/ours/ours",
       iconPath: "/image/home/ours_icon.png",
       selectedIconPath: "/image/ours/ours_select.png",
-      text: ""
+      textZh: "我们",
+      textEn: "OURS"
     }]
-  },
-  attached() {
-    this.setData({
-      language: app.lang
-    })
-    let lastLang = this.data.language;
-    // console.log(lastLang)
-    this.getContent(lastLang);
-  },
-  pageLifetimes: {
-    // show: function () {
-    //   this.setData({
-    //     language: app.lang
-    //   });
-    //   let lastLang = this.data.language;
-    //   console.log(lastLang)
-    //   this.getContent(lastLang);
-    // }
   },
   methods: {
     switchTab(e) {
@@ -58,32 +42,5 @@ Component({
         selected: data.index
       })
     },
-    getContent(lastLang){
-      // let lastLang = app.lang
-      let t = this
-      let text1 = this.data.list[0].text;
-      let text2 = this.data.list[2].text;
-      if (lastLang == "zh") {
-        console.log("zh")
-        text1 = chinese.content.tabarList[0];
-        text2 = chinese.content.tabarList[1];
-        console.log(text1, text2)
-        t.setData({
-          'list[0].text': text1,
-          'list[2].text': text2,
-        })
-      }
-      else if (lastLang == "en") {
-        console.log("en")
-        text1 = english.content.tabarList[0];
-        text2 = english.content.tabarList[1];
-        console.log(text1, text2)
-        console.log(text1, text2)
-        t.setData({
-          'list[0].text': text1,
-          'list[2].text': text2,
-        })
-      }
-    }
   }
 })

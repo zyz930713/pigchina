@@ -12,8 +12,11 @@
     <image 
       src="{{selected === index ? item.selectedIconPath : item.iconPath}}"
     ></image>
-    <view class='tabBar_text' style="color: {{selected === index ? selectedColor : color}}">
-      {{item.text}}      
+    <view wx:if="{{language == 'zh'}}" class='tabBar_text' style="color: {{selected === index ? selectedColor : color}}">
+      {{item.textZh}}      
+    </view>
+     <view wx:if="{{language == 'en'}}" class='tabBar_text' style="color: {{selected === index ? selectedColor : color}}">
+      {{item.textEn}}      
     </view>
   </view>
 </view>

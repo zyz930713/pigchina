@@ -37,8 +37,10 @@ Page({
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
+      console.log(this.getTabBar())
       this.getTabBar().setData({
-        selected: 2
+        selected: 2,
+        language: app.lang
       })
     };
     this.setData({

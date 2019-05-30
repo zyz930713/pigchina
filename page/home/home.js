@@ -42,9 +42,10 @@ Page({
   onShow: function(){
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
-      // console.log(this)
+      console.log(this.getTabBar())
       this.getTabBar().setData({
-        selected: 1
+        selected: 1,
+        language: app.lang
       })
     };
     this.setData({
@@ -76,12 +77,25 @@ Page({
   changeLang() {
     let version = this.data.language;
     if (version == "zh") {
-      app.lang = "en"
+      app.lang = "en";
+      if (typeof this.getTabBar === 'function' &&
+        this.getTabBar()) {
+        this.getTabBar().setData({
+          language: "en",
+        })
+      };
     }
     else {
-      app.lang = "zh"
+      app.lang = "zh";
+      if (typeof this.getTabBar === 'function' &&
+        this.getTabBar()) {
+        this.getTabBar().setData({
+          language: "zh"
+        })
+      };
     }
-    this.onLoad()
+    this.onLoad();
+    
   },
 
   //获取选择语言的字段
