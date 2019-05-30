@@ -68,7 +68,7 @@ swiper-item{
 
 .active{
   transform: scale(1.38,1.68);
-  transition:all .2s ease-in .1s;
+  transition:all .5s ease-in 0.1s;
   /* overflow: visible!important; */
 }
 
