@@ -1,6 +1,6 @@
 page{
   height: 100%;
-  background: url("http://cdn.zjwoo.com/film/background.png");
+  background: url("http://cdn.zjwoo.com/film:background.png");
   background-size: cover;
   background-position-x: -380rpx;
   background-position-y: -66rpx;
