@@ -18,7 +18,7 @@ Component({
       iconPath: "/image/home/contact_icon.png",
       selectedIconPath: "/image/contact/contact_select.png",
       textZh: "导演" ,
-      textEn: "DERECTOR"
+      textEn: "DIRECTOR"
     },  
     {
       pagePath: "/page/home/home",

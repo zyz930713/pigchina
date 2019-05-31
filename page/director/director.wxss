@@ -22,7 +22,7 @@
   color: #444;
 }
 .search-box text{
-  color: #999;
+  color: #fff;
   font-size: 28rpx;
   line-height: 28rpx;
   margin-left: 12rpx;
