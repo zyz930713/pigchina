@@ -38,7 +38,7 @@
       <ul>
         <block wx:for="{{goodsList}}" wx:key="unique">
           <li animation="{{item.animation}}"  style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};"
-            bindtap="choose" data-id="{{item.id}}"
+            catchtap='checkTab' data-id="{{item.goods_id}}"
           >
             <image 
               class='slide-image'
@@ -49,9 +49,8 @@
             <image 
               src='../../image/home/player.png'
               data-index="{{index}}"
-              data-id="{{item.goods_id}}"
               class='player-icon'
-              catchtap='checkTab'
+              
             />
           </li>
         </block>
