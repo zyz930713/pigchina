@@ -4,7 +4,7 @@
     <view class='player-content'>
       <video id='myVideo' src='{{detailInfo.film_url}}'></video>
     </view>
-    <view class='player-introduce'>
+    <view class='player-introduce'> 
       <text wx:if="{{language == 'zh'}}">{{content.production}}：{{detailInfo.goods_name}}</text>
       <text wx:if="{{language == 'en'}}">{{content.production}}：{{detailInfo.en_goods_name}}</text>
       <text wx:if="{{language == 'zh'}}">
@@ -21,7 +21,13 @@
     <text>{{content.related}}</text>
     <view class='recommand-content'>
       <view class='recommand-item' wx:for="{{relatedList}}" wx:key="*this">
-        <video id='relateVideo' src='{{item.film_url}}'></video>
+        <image 
+          data-src='{{item.film_url}}'
+          data-info='{{item}}'
+          id='relateVideo' 
+          src='{{item.img_url}}'
+          bindtap='selectFilm'
+        ></image>
       </view>
     </view>
   </view>

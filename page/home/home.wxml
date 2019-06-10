@@ -34,43 +34,29 @@
   wx:key="unique"
   hidden="{{currentTab!==index}}"
 >
-  <swiper 
-    previous-margin="{{'300rpx'}}"
-    next-margin="{{'300rpx'}}"
-    current='{{swiperCurrent}}' 
-    indicator-dots="{{indicatorDots}}" 
-    autoplay="{{autoplay}}" 
-    interval="{{interval}}" 
-    duration="{{duration}}" 
-    circular='true'
-    vertical='true'
-    bindchange='swiperChange'
-    skip-hidden-item-layout="{{true}}"
-  >
-    <block wx:for="{{goodsList}}" wx:key="unique">
-      <swiper-item 
-        class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secend_active' : ''  }}" >
-        <image 
-          src="{{item.img_url}}" 
-          class="slide-image {{ index==swiperCurrent ? 'active' : '' }} {{swiperCurrent == (index - 1) || swiperCurrent == (index + 1) ? 'secendImg_active' : ''  }}" 
-          bindchange="chuangEvent" 
-          bindtap='checkTab'
-          data-index="{{index}}"
-          data-id="{{item.goods_id}}"
-          id="{{index}}"
-        />
-        <image 
-          src='../../image/home/player.png'
-          wx:if="{{index==swiperCurrent}}"
-          data-index="{{index}}"
-          data-id="{{item.goods_id}}"
-          class='player-icon'
-          catchtap='checkTab'
-        />
-      </swiper-item>
-      <!-- <image class='player-icon' src='../image/home/player.png'></image> -->
-    </block>
-  </swiper>
+  <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem'>
+      <ul>
+        <block wx:for="{{goodsList}}" wx:key="unique">
+          <li animation="{{item.animation}}"  style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};"
+            bindtap="choose" data-id="{{item.id}}"
+          >
+            <image 
+              class='slide-image'
+              src="{{item.img_url}}" 
+              title=""
+              style="transform:scale({{item.scale}})"
+            ></image>
+            <image 
+              src='../../image/home/player.png'
+              data-index="{{index}}"
+              data-id="{{item.goods_id}}"
+              class='player-icon'
+              catchtap='checkTab'
+            />
+          </li>
+        </block>
+      </ul>
+  </view>
 </view>
 <!-- <i-load-more tip="暂无数据" wx:if="{{goodsList.length < 1}}" /> -->
 <view class='no-info' wx:if="{{goodsList.length <= 1}}">

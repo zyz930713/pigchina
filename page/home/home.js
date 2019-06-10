@@ -26,6 +26,9 @@ Page({
     classify: [],
     goodsList: [], //电影列表
     pagenum: 1, //页数
+    order: [],
+    startY: 0,
+    endY: 0,
   },
 
   /**
@@ -36,7 +39,10 @@ Page({
       language: app.lang
     })
     let lastLang = this.data.language;
-    this.getContent(lastLang)
+    this.getContent(lastLang);
+    this.getGoodsLists();
+    this.__set__();
+    this.move();
   },
 
   onShow: function(){
@@ -54,6 +60,118 @@ Page({
     })
     this.getCategoryList();
     this.getGoodsLists();
+  },
+
+  // init: function () {
+  //   let list = this.data.goodsList;
+  //   let middle = Math.ceil(list.length / 2);
+  //   console.log(middle);
+  //   list.forEach((v, i) => {
+  //     if (i == middle) {
+  //       v['zIndex'] = 10;
+  //       v['opacity'] = 1;
+  //       v['scale'] = 1.8;
+  //       v['top'] = (i + 1) * 50;
+  //       v['animation'] = null;
+  //     }
+  //     else if (i == (middle - 1) || i == (middle + 1)) {
+  //       v['zIndex'] = 8;
+  //       v['opacity'] = 0.8;
+  //       v['scale'] = 1.4;
+  //       v['top'] = (i + 1) * 50;
+  //       v['animation'] = null;
+  //     }
+  //     else {
+  //       v['zIndex'] = 6;
+  //       v['opacity'] = 0.4;
+  //       v['scale'] = 1;
+  //       v['top'] = (i + 1) * 50;
+  //       v['animation'] = null;
+  //     }
+  //   })
+  //   this.setData({
+  //     goodsList: list
+  //   })
+  // },
+
+  move: function () {
+    var datas = this.data.goodsList;
+    /*图片分布*/
+    for (var i = 0; i < datas.length; i++) {
+      var data = datas[i];
+      var animation = wx.createAnimation({
+        duration: 200
+      });
+      // animation.translateX(data.left).step();
+      animation.translateY(data.top).step();
+      this.setData({
+        ["goodsList[" + i + "].animation"]: animation.export(),
+        ["goodsList[" + i + "].zIndex"]: data.zIndex,
+        ["goodsList[" + i + "].opacity"]: data.opacity,
+        ["goodsList[" + i + "].scale"]: data.scale,
+      })
+    }
+  },
+
+  /**新的排列复制到新的数组中 */
+  __set__: function () {
+    var that = this;
+    var order = that.data.order;
+    var datas = that.data.goodsList;
+    for (var i = 0; i < datas.length; i++) {
+      that.setData({
+        // ["order[" + i + "]"]: datas[i].id
+        ["order[" + i + "]"]: datas[i].goods_id
+      })
+    }
+  },
+  //手指触发开始移动
+  moveStart: function (e) {
+    console.log(e);
+    // var startX = e.changedTouches[0].pageX;
+    var startY = e.changedTouches[0].pageY;
+    this.setData({
+      startY: startY
+    });
+  },
+  //手指触摸后移动完成触发事件
+  moveItem: function (e) {
+    console.log(e);
+    var that = this;
+    // var endX = e.changedTouches[0].pageX;
+    var endY = e.changedTouches[0].pageY;
+    this.setData({
+      endY: endY
+    });
+    //计算手指触摸偏移剧距离
+    // var moveY = this.data.startY - this.data.endY;
+    var moveY = this.data.endY - this.data.startY;
+    console.log(moveY)
+    //向左移动
+    if (moveY > 20) {
+      this.down();
+    }
+    if (moveY < -20) {
+      this.up();
+    }
+  },
+
+  /**上移 */
+  up: function () {
+    //
+    var last = this.data.goodsList.pop(); //获取数组的最后一个
+    this.data.goodsList.unshift(last);//放到数组的第一个
+    var orderFirst = this.data.order.shift();
+    this.data.order.push(orderFirst);
+    this.move();
+  },
+  /**下移 */
+  down: function () {
+    var first = this.data.goodsList.shift(); //获取数组的第一个
+    this.data.goodsList.push(first);//放到数组的最后一个位置
+    var orderLast = this.data.order.pop();
+    this.data.order.unshift(orderLast);
+    this.move();
   },
 
   //获取分类列表
@@ -125,13 +243,38 @@ Page({
       url: "Goods/lists",
       success: function (res) {
         goodsList = res.data.data.data;
-        goodsList.forEach( ele => {
-          ele['img_url'] = ele.film_url + '?vframe/jpg/offset/2';
+        let middle = Math.ceil(goodsList.length / 2);
+        console.log(middle)
+        goodsList.forEach( (v,i) => {
+          v['img_url'] = v.film_url + '?vframe/jpg/offset/2';
+          if (i == middle) {
+            v['zIndex'] = 10;
+            v['opacity'] = 1;
+            v['scale'] = 1.8;
+            v['top'] = (i + 1) * 80;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 1) || i == (middle + 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            v['top'] = (i + 1) * 80;
+            v['animation'] = null;
+          }
+          else {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            v['top'] = (i + 1) * 80;
+            v['animation'] = null;
+          }
         } )
         // console.log(res)
         that.setData({
           goodsList
         })
+        that.__set__();
+        that.move();
       }
     };
     http.wxRequest(opt)
@@ -168,15 +311,18 @@ Page({
 
   //点击选中图片跳转详情
   checkTab(e){
-    let checkIndex = e.currentTarget.dataset.index;
+    // let checkIndex = e.currentTarget.dataset.index;
+    // console.log(checkIndex)
+   
+    // let swiperCurrent = this.data.swiperCurrent;
+    // if (swiperCurrent == checkIndex ){
+      
+    // }
+    // else return;
     let goods_id = e.currentTarget.dataset.id;
-    let swiperCurrent = this.data.swiperCurrent;
-    if (swiperCurrent == checkIndex ){
-      wx.navigateTo({
-        url: '../detail/detail?goods_id=' + goods_id,
-      })
-    }
-    else return;
+    wx.navigateTo({
+      url: '../detail/detail?goods_id=' + goods_id,
+    })
   },
 
 

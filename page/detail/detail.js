@@ -18,6 +18,7 @@ Page({
     // recommandList: [1,2,3,3]
     detailInfo: {}, //电影详情
     relatedList: [], //相关推荐
+    // chooseFilm: {}, //选中的电影
   },
 
   /**
@@ -64,7 +65,10 @@ Page({
       url: "Goods/detail",
       success: function (res) {
         detailInfo = res.data.data.detail;
-        relatedList = res.data.data.list
+        relatedList = res.data.data.list;
+        relatedList.forEach( v => {
+          v['img_url'] = v.film_url + '?vframe/jpg/offset/2'
+        } )
         that.setData({
           detailInfo,
           relatedList
@@ -73,6 +77,20 @@ Page({
     };
     http.wxRequest(opt)
   },
+
+
+  //选中电影播放
+  selectFilm(e){
+    // console.log(e.currentTarget.dataset.src);
+    console.log(e.currentTarget.dataset.info);
+    let detailInfo = this.data.detailInfo;
+    detailInfo = e.currentTarget.dataset.info;
+    this.setData(
+      {
+        detailInfo
+      }
+    )
+  }
 
   
 })
