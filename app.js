@@ -1,20 +1,24 @@
-// import locales from './utils/locales.js';
-// import T from './utils/i18n.js'
-
-// T.registerLocale(locales);
-// T.setLocaleByIndex(wx.getStorageSync('langIndex') || 0);
-// wx.T = T;
-
 App({
-  // onLaunch: function () {
-  //   let value = wx.getStorageSync('lang');
-  //   if(value == "") {
-  //     let res = wx.getSystemInfoSync();
-  //     this.lang = res.language;
-  //     console.log(this.lang);
-  //   }
-  // },
-
+  onShow: function (e) {
+    var t = this;
+    try {
+      var n = wx.getUpdateManager();
+      n.onCheckForUpdate(function (e) {
+        console.log(e);
+      }), n.onUpdateReady(function () {
+        wx.showModal({
+          title: "更新提示",
+          content: "新版本已经准备好，重启应用？",
+          showCancel: !1,
+          success: function (e) {
+            e.confirm && n.applyUpdate();
+          }
+        });
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  },
   lang: "zh"  //语言信息
 
 

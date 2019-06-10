@@ -3,8 +3,8 @@ const { $Toast } = require('../dist/base/index');
 
 
 module.exports = {
-  URL: 'http://film.zjwoo.com/api/',
-  imgURL: 'http://film.zjwoo.com',
+  URL: 'https://film.zjwoo.com/api/',
+  imgURL: 'https://film.zjwoo.com',
   /**
   * http://film.zjwoo.com
   * 封装wx.request请求
