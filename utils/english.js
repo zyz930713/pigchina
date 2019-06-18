@@ -1,5 +1,5 @@
 let English = {
-  tabarList: ["DIRECTOR","ABOUT"],
+  tabarList: ["CONTACT","ABOUT"],
   search: "SEARCH",
   unfold: "UNFOLD",
   packUp: "PACK UP",

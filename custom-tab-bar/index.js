@@ -18,7 +18,7 @@ Component({
       iconPath: "/image/home/contact_icon.png",
       selectedIconPath: "/image/contact/contact_select.png",
       textZh: "导演" ,
-      textEn: "DIRECTOR"
+      textEn: "CONTACT"
     },  
     {
       pagePath: "/page/home/home",
@@ -30,7 +30,7 @@ Component({
       iconPath: "/image/home/ours_icon.png",
       selectedIconPath: "/image/ours/ours_select.png",
       textZh: "我们",
-      textEn: "OURS"
+      textEn: "ABOUT"
     }]
   },
   methods: {

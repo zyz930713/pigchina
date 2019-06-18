@@ -34,7 +34,7 @@
       <swiper-item 
         class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} ">
         <image 
-          src="{{item.imgUrl}}" 
+          src="{{item.imgUrl}}"
           class="slide-image {{ index==swiperCurrent ? 'active' : '' }}" 
           bindchange="chuangEvent" 
           data-index="{{index}}"
