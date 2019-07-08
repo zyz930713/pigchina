@@ -15,7 +15,7 @@ Page({
     language: "",
     content: "", //自定义字段
 
-    swiperCurrent: 1,
+    swiperCurrent: 0,
     detailInfo: {}, //导演详情
     indicatorDots: false,
     autoplay: false,

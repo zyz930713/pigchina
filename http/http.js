@@ -4,6 +4,7 @@ const { $Toast } = require('../dist/base/index');
 
 module.exports = {
   URL: 'https://www.e234.top/api/',
+  // URL: 'https://film.zjwoo.com/api/',
   imgURL: 'https://www.e234.top/',
 
   /**

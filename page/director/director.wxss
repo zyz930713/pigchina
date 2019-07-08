@@ -3,7 +3,7 @@
   padding-bottom: 100rpx;
 }
 .search-box{
-  width: 100%;
+  /* width: 100%; */
   position: relative;
   margin-top:40rpx;
   margin-left:24rpx;

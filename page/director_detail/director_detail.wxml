@@ -3,56 +3,30 @@
   <view class='director_introduce'>
     <view class="director_introduce_title" wx:if="{{language == 'zh'}}">{{detailInfo.detail.director_name}}</view>
     <view class="director_introduce_title" wx:if="{{language == 'en'}}">{{detailInfo.detail.en_director_name}}</view>
-    <view 
-      class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}'
-      wx:if="{{language == 'zh'}}"
-    >
-     {{detailInfo.detail.content}}
+    <view class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}' wx:if="{{language == 'zh'}}">
+      {{detailInfo.detail.content}}
     </view>
-     <view 
-      class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}'
-      wx:if="{{language == 'en'}}"
-    >
-     {{detailInfo.detail.en_content}}
+    <view class='director_introduce_content {{textHidden ? "text-hidden" : "text-show"}}' wx:if="{{language == 'en'}}">
+      {{detailInfo.detail.en_content}}
     </view>
     <view class='change-tab arrow-down' bindtap='textToggle' wx:if="{{textHidden}}">{{content.unfold}}</view>
     <view class='change-tab arrow-up' bindtap='textToggle' wx:if="{{!textHidden}}">{{content.packUp}}</view>
   </view>
   <view class='director_works'>
-      <swiper 
-        previous-margin="{{'90rpx'}}"
-        next-margin="{{'230rpx'}}"
-        current='{{swiperCurrent}}' 
-        indicator-dots="{{indicatorDots}}" 
-        autoplay="{{autoplay}}" 
-        interval="{{interval}}" 
-        duration="{{duration}}" 
-        circular='true'
-        bindchange='swiperChange'
-      >
-    <block wx:for="{{detailInfo.list}}" wx:key="*this">
-      <swiper-item 
-        class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} ">
-        <image 
-          src="{{item.imgUrl}}"
-          class="slide-image {{ index==swiperCurrent ? 'active' : '' }}" 
-          bindchange="chuangEvent" 
-          data-index="{{index}}"
-          id="{{index}}"
-          data-id="{{item.goods_id}}"
-          mode='aspectFit'
-          bindtap='checkTab'
-        />
-         <view class='director_works_title' wx:if="{{language == 'zh'}}">{{item.goods_name}}</view>
-         <view class='director_works_title' wx:if="{{language == 'en'}}">{{item.en_goods_name}}</view>
-      </swiper-item>
-     
-    </block>
-    
-  </swiper>
-  
+     <swiper previous-margin="{{'90rpx'}}" next-margin="{{'230rpx'}}" current='{{swiperCurrent}}' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular='true' bindchange='swiperChange'>
+        <block wx:for="{{detailInfo.list}}" wx:key="*this">
+          <swiper-item class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} ">
+            <image src="{{item.imgUrl}}" class="slide-image {{ index==swiperCurrent ? 'active' : '' }}" bindchange="chuangEvent" data-index="{{index}}" id="{{index}}" data-id="{{item.goods_id}}" mode='aspectFit' bindtap='checkTab' />
+            <view class='director_works_title' wx:if="{{language == 'zh'}}">{{item.goods_name}}</view>
+            <view class='director_works_title' wx:if="{{language == 'en'}}">{{item.en_goods_name}}</view>
+          </swiper-item>
+
+        </block>
+
+      </swiper>
+
+
   </view>
 </view>
 
 <i-toast id="toast" />
-

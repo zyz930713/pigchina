@@ -36,8 +36,8 @@
   margin-bottom: 46rpx;
 }
 .aboutUs-contact_item image{
-  width: 42rpx;
-  height: 36rpx;
+  width: 50rpx;
+  height: 50rpx;
   display: inline-block;
 }
 .aboutUs-contact_item text{

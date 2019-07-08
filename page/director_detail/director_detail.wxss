@@ -59,10 +59,13 @@
 .director_works_title{
   position: absolute;
   width: 100%;
-  bottom: -6rpx;
+  bottom: 0rpx;
   left: 70rpx;
   color: #aaa; 
   text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 

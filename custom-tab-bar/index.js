@@ -15,9 +15,9 @@ Component({
     selectedColor: "#fff",
     list: [{
       pagePath: "/page/director/director",
-      iconPath: "/image/home/contact_icon.png",
-      selectedIconPath: "/image/contact/contact_select.png",
-      textZh: "导演" ,
+      iconPath: "/image/home/mobile_icon.png",
+      selectedIconPath: "/image/home/contact_active.png",
+      textZh: "联系" ,
       textEn: "CONTACT"
     },  
     {
@@ -27,8 +27,8 @@ Component({
     },
     {
       pagePath: "/page/ours/ours",
-      iconPath: "/image/home/ours_icon.png",
-      selectedIconPath: "/image/ours/ours_select.png",
+      iconPath: "/image/home/about_icon.png",
+      selectedIconPath: "/image/home/ours_active.png",
       textZh: "我们",
       textEn: "ABOUT"
     }]

@@ -29,6 +29,8 @@ Page({
     order: [],
     startY: 0,
     endY: 0,
+
+    height: 0 //屏幕高度
   },
 
   /**
@@ -40,9 +42,10 @@ Page({
     })
     let lastLang = this.data.language;
     this.getContent(lastLang);
-    this.getGoodsLists();
+    // this.getGoodsLists();
     this.__set__();
     this.move();
+    this.getHeight();
   },
 
   onShow: function(){
@@ -62,43 +65,32 @@ Page({
     this.getGoodsLists();
   },
 
-  // init: function () {
-  //   let list = this.data.goodsList;
-  //   let middle = Math.ceil(list.length / 2);
-  //   console.log(middle);
-  //   list.forEach((v, i) => {
-  //     if (i == middle) {
-  //       v['zIndex'] = 10;
-  //       v['opacity'] = 1;
-  //       v['scale'] = 1.8;
-  //       v['top'] = (i + 1) * 50;
-  //       v['animation'] = null;
-  //     }
-  //     else if (i == (middle - 1) || i == (middle + 1)) {
-  //       v['zIndex'] = 8;
-  //       v['opacity'] = 0.8;
-  //       v['scale'] = 1.4;
-  //       v['top'] = (i + 1) * 50;
-  //       v['animation'] = null;
-  //     }
-  //     else {
-  //       v['zIndex'] = 6;
-  //       v['opacity'] = 0.4;
-  //       v['scale'] = 1;
-  //       v['top'] = (i + 1) * 50;
-  //       v['animation'] = null;
-  //     }
-  //   })
-  //   this.setData({
-  //     goodsList: list
-  //   })
-  // },
+  getHeight(){
+    let that = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        let clientHeight = res.windowHeight;
+        that.setData({
+          height: clientHeight
+        })
+      },
+    })
+  },
 
   move: function () {
-    var datas = this.data.goodsList;
+    let that = this;
+    // let pagenum = this.data.pagenum + 1;
+    let datas = this.data.goodsList;
     /*图片分布*/
     for (var i = 0; i < datas.length; i++) {
+      // if(i==9){
+      //   that.setData({
+      //     pagenum,
+      //   })
+      //   that.getGoodsLists()
+      // }
       var data = datas[i];
+      console.log(data)
       var animation = wx.createAnimation({
         duration: 200
       });
@@ -120,7 +112,7 @@ Page({
     var datas = that.data.goodsList;
     for (var i = 0; i < datas.length; i++) {
       that.setData({
-        // ["order[" + i + "]"]: datas[i].id
+
         ["order[" + i + "]"]: datas[i].goods_id
       })
     }
@@ -235,15 +227,18 @@ Page({
     let that = this;
     let goodsList = this.data.goodsList;
     let category_id = this.data.category_id;
+    let pageNum = this.data.pagenum;
     let opt = {
       data: {
         pageSize: 10,
-        category_id
+        category_id,
+        page: pageNum,
       },
       url: "Goods/lists",
       success: function (res) {
         goodsList = res.data.data.data;
-        let middle = Math.ceil(goodsList.length / 2);
+        let middle = Math.ceil(goodsList.length / 2)-1;
+        let viewHeight = that.data.height;
         console.log(middle)
         goodsList.forEach( (v,i) => {
           v['img_url'] = v.film_url + '?vframe/jpg/offset/2';
@@ -251,19 +246,45 @@ Page({
             v['zIndex'] = 10;
             v['opacity'] = 1;
             v['scale'] = 1.8;
-            v['top'] = (i + 1) * 80;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 200;
             v['animation'] = null;
           }
-          else if (i == (middle - 1) || i == (middle + 1)) {
+          else if (i == (middle - 1)) {
             v['zIndex'] = 8;
             v['opacity'] = 0.8;
             v['scale'] = 1.4;
-            v['top'] = (i + 1) * 80;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 120;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 280;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 2)){
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 40;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 360;
             v['animation'] = null;
           }
           else {
             v['zIndex'] = 6;
-            v['opacity'] = 0.4;
+            v['opacity'] = 0;
             v['scale'] = 1;
             v['top'] = (i + 1) * 80;
             v['animation'] = null;
