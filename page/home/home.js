@@ -25,6 +25,7 @@ Page({
     category_id: 1, //当前选中的分类ID
     classify: [],
     goodsList: [], //电影列表
+    directorList: [], //导演列表
     pagenum: 1, //页数
     order: [],
     startY: 0,
@@ -60,9 +61,12 @@ Page({
     this.setData({
       classify: [],
       goodsList: [],
+      currentTab: 0,
+      category_id:1
     })
     this.getCategoryList();
     this.getGoodsLists();
+    // this.getDirectorLists();
   },
 
   getHeight(){
@@ -112,7 +116,6 @@ Page({
     var datas = that.data.goodsList;
     for (var i = 0; i < datas.length; i++) {
       that.setData({
-
         ["order[" + i + "]"]: datas[i].goods_id
       })
     }
@@ -227,12 +230,12 @@ Page({
     let that = this;
     let goodsList = this.data.goodsList;
     let category_id = this.data.category_id;
-    let pageNum = this.data.pagenum;
+    // let pageNum = this.data.pagenum;
     let opt = {
       data: {
         pageSize: 10,
         category_id,
-        page: pageNum,
+        // page: pageNum,
       },
       url: "Goods/lists",
       success: function (res) {
@@ -301,6 +304,83 @@ Page({
     http.wxRequest(opt)
   },
 
+  //获取导演列表
+  getDirectorLists() {
+    let that = this;
+    let goodsList = this.data.goodsList;
+    let opt = {
+      data: {
+        // page: pagenum,
+        // pageSize: 10,
+        // keywords
+      },
+      url: "Director/lists",
+      success: function (res) {
+        goodsList = res.data.data.data;
+        let middle = Math.ceil(goodsList.length / 2) - 1;
+        let viewHeight = that.data.height;
+        console.log(middle)
+        goodsList.forEach((v, i) => {
+          v['img_url'] = v.image.file_path;
+          if (i == middle) {
+            v['zIndex'] = 10;
+            v['opacity'] = 1;
+            v['scale'] = 1.8;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 200;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 120;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 280;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 40;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 360;
+            v['animation'] = null;
+          }
+          else {
+            v['zIndex'] = 6;
+            v['opacity'] = 0;
+            v['scale'] = 1;
+            v['top'] = (i + 1) * 80;
+            v['animation'] = null;
+          }
+        })
+        // console.log(res)
+        that.setData({
+          goodsList
+        })
+        that.__set__();
+        that.move();
+      }
+    };
+    http.wxRequest(opt)
+  },
+
   //点击播放事件
   startPlay(e){
     let id = e.currentTarget.dataset.id;
@@ -346,15 +426,37 @@ Page({
     })
   },
 
+  //点击选中图片跳转详情
+  checkTab2(e) {
+    console.log(e);
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../director_detail/director_detail?id=' + id,
+    })
+  },
 
   //点击切换，滑块index赋值
   navbarTap: function (e) {
-    this.setData({
-      currentTab: e.currentTarget.dataset.idx,
-      category_id: e.currentTarget.dataset.id,
-      goodsList: []
-    })
-    this.getGoodsLists();
+    console.log(e);
+    let sign = e.currentTarget.dataset.sign;
+    let _this = this;
+    if (sign == "vedio"){
+      _this.setData({
+        currentTab: e.currentTarget.dataset.idx,
+        category_id: e.currentTarget.dataset.id,
+        goodsList: []
+      })
+      _this.getGoodsLists();
+    }
+    else if (sign == "director"){
+      _this.setData({
+        currentTab: e.currentTarget.dataset.idx,
+        category_id: e.currentTarget.dataset.id,
+        goodsList: []
+      })
+      _this.getDirectorLists();
+    }
+    
   },
 })
 

@@ -1,8 +1,8 @@
 let English = {
   tabarList: ["CONTACT","ABOUT"],
   search: "SEARCH",
-  unfold: "UNFOLD",
-  packUp: "PACK UP",
+  unfold: "EXPAND",
+  packUp: "REDUCE",
   production: "PRODUCTION",
   director: "DIRECTOR",
   filmProducer: "FILM PRODUCER",

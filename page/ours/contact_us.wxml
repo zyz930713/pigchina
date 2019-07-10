@@ -6,7 +6,7 @@
   <view class='aboutUs-contact'>
     <view class='aboutUs-contact_header'>{{content.contactUs}}</view>
     <view class='aboutUs-contact_opt'>
-      <view class='aboutUs-contact_item'>
+      <view class='aboutUs-contact_item' bindtap='makeCall'>
         <image src='../../image/ours/mobile.png'></image>
         <text>{{configInfo.tel}}</text>
       </view>
@@ -28,7 +28,7 @@
     <view class='aboutUs-location_item'>
       <image src='{{configInfo.image_one_file}}'></image>
     </view>
-    <view class='aboutUs-location_item'>
+    <view class='aboutUs-location_item' bindtap='toMap'>
       <image src='{{configInfo.image_two_file}}'></image>
     </view>
   </view>

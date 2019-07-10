@@ -15,7 +15,7 @@
     "backgroundColor": "#000",
     "list": [
       {
-        "pagePath": "page/director/director",
+        "pagePath": "page/ours/contact_us",
         "iconPath": "image/home/contact_icon.png",
         "selectedIconPath": "image/home/contact_icon.png",
         "text": "联系"
@@ -43,5 +43,10 @@
   "usingComponents": {
     "i-toast": "../../dist/toast/index",
     "i-load-more": "../../dist/load-more/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于地图导航"
+    }
   }
 }

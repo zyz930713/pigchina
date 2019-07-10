@@ -38,9 +38,10 @@ Page({
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
-        selected: 2
+        selected: 0,
+        language: app.lang
       })
-    };
+    }
     this.setData({
       language: app.lang
     })
@@ -81,6 +82,35 @@ Page({
     http.wxRequest(opt)
   },
 
+  //获取地图
+  toMap: function () {
+    let configInfo = this.data.configInfo;
+    let latitude = parseFloat(configInfo.latitude);
+    let longitude = parseFloat(configInfo.longitude);
+    console.log(latitude)
+    wx.getLocation({//获取当前经纬度
+      type: 'wgs84', //返回可以用于wx.openLocation的经纬度，官方提示bug: iOS 6.3.30 type 参数不生效，只会返回 wgs84        类型的坐标信息  
+      success: function (res) {
+        wx.openLocation({//​使用微信内置地图查看位置。
+          latitude: latitude,//要去的纬度-地址
+          longitude: longitude,//要去的经度-地址
+          name: configInfo.name,
+          address: configInfo.address,
+        })
+      }
+    })
+    // wx.navigateTo({
+    //   url: '../map/map',
+    // })
+  },
+
+  //点击拨打电话
+  makeCall() {
+    let mobile = this.data.configInfo.tel;
+    wx.makePhoneCall({
+      phoneNumber: mobile
+    })
+  },
 
 
 

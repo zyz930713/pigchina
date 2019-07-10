@@ -14,7 +14,7 @@ Component({
     color: "#fff",
     selectedColor: "#fff",
     list: [{
-      pagePath: "/page/director/director",
+      pagePath: "/page/ours/contact_us",
       iconPath: "/image/home/mobile_icon.png",
       selectedIconPath: "/image/home/contact_active.png",
       textZh: "联系" ,

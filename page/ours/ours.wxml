@@ -11,9 +11,9 @@
       <text>{{configInfo.en_aboutus}}</text>
     </view>
   </view>
-  <view class='contact-btn'>
+  <!-- <view class='contact-btn'>
     <button bindtap='toContactUs'>{{content.contactUs}}</button>
-  </view>
+  </view> -->
   
 </view>
 <i-toast id="toast" />
