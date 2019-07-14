@@ -1,0 +1,48 @@
+<!--page/new_home/new_home.wxml-->
+<view class='lang-change' bindtap='changeLang'>
+  中文/English
+</view>
+<view class='navbar'>
+  <block 
+    wx:if="{{language == 'zh'}}"
+  >
+    <text
+      class='item {{currentTab == index ? "tab_active" : ""}}' 
+      wx:for="{{classify}}" 
+      wx:key="unique"
+      data-idx="{{index}}"
+      bindtap='navbarTap' 
+    >{{item.name}}</text>
+  </block>
+   <block 
+    wx:if="{{language == 'en'}}"
+   >
+    <text
+      class='item {{currentTab == index ? "tab_active" : ""}}' 
+      wx:for="{{classify}}" 
+      wx:key="unique"
+      data-idx="{{index}}"
+      data-id='{{item.category_id}}'
+      bindtap='navbarTap' 
+    >{{item.en_name}}</text>
+  </block>     
+</view>
+<view class="item-box" wx:if="{{currentTab == 0}}">
+  <view class="item-box_sub" wx:for="{{newList}}" wx:key="unique">
+    
+  </view>
+</view>
+<view class="item-box" wx:if="{{currentTab == 1}}">
+  2
+</view>
+<view class="item-box" wx:if="{{currentTab == 2}}">
+  3
+</view>
+<view class="item-box" wx:if="{{currentTab == 3}}">
+  4
+</view>
+<!-- <i-load-more tip="暂无数据" wx:if="{{goodsList.length < 1}}" /> -->
+<view class='no-info' wx:if="{{goodsList.length <= 1}}">
+  {{content.noData}}
+</view>
+<i-toast id="toast" />

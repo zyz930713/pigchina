@@ -21,7 +21,7 @@ Component({
       textEn: "CONTACT"
     },  
     {
-      pagePath: "/page/home/home",
+      pagePath: "/page/new_home/new_home",
       iconPath: "/image/home/home_icon.png",
       selectedIconPath: "/image/home/home_icon.png"
     },

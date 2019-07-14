@@ -1,5 +1,6 @@
 {
   "pages": [
+    "page/new_home/new_home",
     "page/home/home",
     "page/ours/ours",
     "page/detail/detail",
@@ -21,7 +22,7 @@
         "text": "联系"
       },
       {
-        "pagePath": "page/home/home",
+        "pagePath": "page/new_home/new_home",
         "iconPath": "image/home/home_icon.png",
         "selectedIconPath": "image/home/home_icon.png"
       },
