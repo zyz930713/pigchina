@@ -6,7 +6,8 @@
     "page/detail/detail",
     "page/director/director",
     "page/director_detail/director_detail",
-    "page/ours/contact_us"
+    "page/ours/contact_us",
+    "page/works_list/works_list"
   ],
   "tabBar": {
     "custom": true,

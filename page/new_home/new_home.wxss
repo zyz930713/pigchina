@@ -1,6 +1,6 @@
 /* page/new_home/new_home.wxss */
 page{
-  overflow: visible;
+  overflow-y: scroll!important;
 }
 
 .navbar{
@@ -37,12 +37,14 @@ page{
 } 
 .item-box {
   width: 92%;
-  margin: 20rpx auto;
+  margin: 20rpx auto 0;
+  /* padding-bottom: 200rpx; */
   /* display: flex;
   justify-content: space-between;
   align-items: center; */
 }
 .item-box_sub {
+  position: relative;
   width: 46%;
   margin: 0 2% 20rpx;
   height: 300rpx;
@@ -51,7 +53,21 @@ page{
   opacity: 0.4;
   border-radius: 20rpx;
 }
-
+.item-box_sub>view {
+  width: 30%;
+  margin: 44% auto 0;
+  font-size: 30rpx;
+  color: #fff;
+  text-align: center;
+}
+.item-box_more {
+  width: 100%;
+  height: 300rpx;
+  background: #000;
+  opacity: 0.4;
+  border-radius: 20rpx;
+  margin-bottom: 200rpx;
+}
 
 
 

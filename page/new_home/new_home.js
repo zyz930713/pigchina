@@ -113,18 +113,51 @@ Page({
     }
   },
 
+  //获取分类列表
+  getCategoryList() {
+    let that = this;
+    let worksList = this.data.worksList;
+    let opt = {
+      url: "Category/lists",
+      success: function (res) {
+        worksList = res.data.data;
+        console.log(res)
+        that.setData({
+          worksList
+        })
+      }
+    };
+    http.wxRequest(opt)
+  },
+
+  //跳转到作品详情列表
+  toWorkDetail(e) {
+    console.log(e)
+    let id = e.currentTarget.dataset.id
+    let name = e.currentTarget.dataset.name
+    wx.navigateTo({
+      url: '../works_list/works_list?id=' + id + '&name=' + name,
+    })
+  },
+
   
 
   //点击切换，滑块index赋值
   navbarTap: function (e) {
     console.log(e);
+    let _this = this;
+    let currentTab = this.data.currentTab;
     // let sign = e.currentTarget.dataset.sign;
-    // let _this = this;
+   
     this.setData({
       currentTab: e.currentTarget.dataset.idx,
-      // category_id: e.currentTarget.dataset.id,
-      // goodsList: []
-    })  
+    })
+    if (currentTab == 0 ) {
+      _this.getCategoryList()
+      // _this.setData({
+      //   currentTab: e.currentTarget.dataset.idx,
+      // })
+    }  
   },
 })
 
