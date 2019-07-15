@@ -2,7 +2,7 @@
 
 
 <view class='navbar'>
-  <view>作品 | 默默</view>
+  <view>作品 | {{category_name}}</view>
 </view>
 <view 
   class='banner-swiper' 
@@ -11,7 +11,7 @@
   wx:key="unique"
   hidden="{{currentTab!==index}}"
 >
-  <view wx:if="{{classifyItem.sign == 'vedio'}}" class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem'>
+  <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem'>
       <ul>
         <block wx:for="{{goodsList}}" wx:key="unique">
           <li animation="{{item.animation}}"  style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};"
@@ -28,26 +28,6 @@
               data-index="{{index}}"
               class='player-icon'
             />
-          </li>
-        </block>
-      </ul>
-  </view>
-  <view wx:if="{{classifyItem.sign == 'director'}}" class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem'>
-      <ul>
-        <block wx:for="{{goodsList}}" wx:key="unique">
-          <li animation="{{item.animation}}"  style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};"
-            catchtap='checkTab2' data-id='{{item.director_id}}' 
-          >
-            <image 
-              class='slide-image'
-              src="{{item.img_url}}" 
-              title=""
-              style="transform:scale({{item.scale}})"
-            ></image>
-            <view class='director-name' style='opacity:{{item.opacity}}'>
-              <text wx:if="{{language == 'zh'}}">{{item.director_name}}</text>
-              <text wx:if="{{language == 'en'}}">{{item.en_director_name}}</text>
-            </view>
           </li>
         </block>
       </ul>

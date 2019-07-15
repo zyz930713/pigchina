@@ -435,6 +435,8 @@ Page({
     })
   },
 
+  
+
   //点击切换，滑块index赋值
   navbarTap: function (e) {
     console.log(e);

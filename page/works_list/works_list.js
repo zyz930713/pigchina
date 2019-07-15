@@ -50,19 +50,11 @@ Page({
   },
 
   onShow: function () {
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      console.log(this.getTabBar())
-      this.getTabBar().setData({
-        selected: 1,
-        language: app.lang
-      })
-    };
     this.setData({
-      classify: [],
+      // classify: [],
       goodsList: [],
       currentTab: 0,
-      category_id: 1
+      category_id: this.data.category_id
     })
     this.getCategoryList();
     this.getGoodsLists();

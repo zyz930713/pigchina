@@ -20,18 +20,22 @@ Page({
     category_id: 1, //当前选中的分类ID
     classify: [
       {
+        id: 0,
         name: "最新",
         en_name: "NEW"
       },
       {
+        id: 1,
         name: "作品",
         en_name: "WORKS"
       },
       {
+        id: 2,
         name: "导演",
         en_name: "DIRECTOR"
       },
       {
+        id: 3,
         name: "服务",
         en_name: "SERVICE"
       }
@@ -130,6 +134,26 @@ Page({
     http.wxRequest(opt)
   },
 
+  //获取导演列表
+  getDirectorLists() {
+    let that = this;
+    let directorList = this.data.directorList;
+    let opt = {
+      data: {
+        // pageSize: 10,
+      },
+      url: "Director/lists",
+      success: function (res) {
+        console.log(res.data.data.data)
+        directorList = res.data.data.data;
+        that.setData({
+          directorList
+        })
+      }
+    };
+    http.wxRequest(opt)
+  },
+
   //跳转到作品详情列表
   toWorkDetail(e) {
     console.log(e)
@@ -140,23 +164,34 @@ Page({
     })
   },
 
-  
+  //跳转到导演详情
+  toDetail(e) {
+    console.log(e.currentTarget.dataset.id)
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../director_detail/director_detail?id=' + id,
+    })
+  },
 
   //点击切换，滑块index赋值
   navbarTap: function (e) {
     console.log(e);
     let _this = this;
-    let currentTab = this.data.currentTab;
+    // let currentTab = this.data.currentTab;
     // let sign = e.currentTarget.dataset.sign;
    
     this.setData({
       currentTab: e.currentTarget.dataset.idx,
     })
-    if (currentTab == 0 ) {
+    let currentTab = this.data.currentTab;
+    if ( currentTab == 1 ) {
       _this.getCategoryList()
       // _this.setData({
       //   currentTab: e.currentTarget.dataset.idx,
       // })
+    } else if (currentTab == 2 ) {
+      console.log(1)
+      _this.getDirectorLists()
     }  
   },
 })

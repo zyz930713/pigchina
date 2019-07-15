@@ -37,7 +37,7 @@ page{
 } 
 .item-box {
   width: 92%;
-  margin: 20rpx auto 0;
+  margin: 20rpx auto 200rpx;
   /* padding-bottom: 200rpx; */
   /* display: flex;
   justify-content: space-between;
@@ -54,7 +54,6 @@ page{
   border-radius: 20rpx;
 }
 .item-box_sub>view {
-  width: 30%;
   margin: 44% auto 0;
   font-size: 30rpx;
   color: #fff;
