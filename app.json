@@ -7,7 +7,8 @@
     "page/director/director",
     "page/director_detail/director_detail",
     "page/ours/contact_us",
-    "page/works_list/works_list"
+    "page/works_list/works_list",
+    "page/service_detail/service_detail"
   ],
   "tabBar": {
     "custom": true,

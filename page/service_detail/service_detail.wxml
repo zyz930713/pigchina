@@ -1,0 +1,31 @@
+<!--page/service_detail/service_detail.wxml-->
+<view class="container">
+  <view class='aboutUs-logo'>
+    <image src='../../image/ours/logo.png'></image>
+  </view>
+  <view class='aboutUs-des' wx:if="{{language == 'zh'}}">
+    <view class='aboutUs-des_header'>{{serviceInfo.goods_name}}</view>
+    <view class='aboutUs-des_content'>
+      <text>{{serviceInfo.content}}</text>
+    </view>
+    <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
+      <text>{{configInfo.en_aboutus}}</text>
+    </view> -->
+  </view>
+  <view class='aboutUs-des' wx:if="{{language == 'en'}}">
+    <view class='aboutUs-des_header'>{{serviceInfo.en_goods_name}}</view>
+    <view class='aboutUs-des_content'>
+      <text>{{serviceInfo.en_content}}</text>
+    </view>
+    <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
+      <text>{{configInfo.en_aboutus}}</text>
+    </view> -->
+  </view>
+  <!-- <view class='contact-btn'>
+    <button bindtap='toContactUs'>{{content.contactUs}}</button>
+  </view> -->
+  
+</view>
+<i-toast id="toast" />
+
+<!-- <image mode='aspectFill' class='bac-img' src='../../image/ours/background.png'></image> -->

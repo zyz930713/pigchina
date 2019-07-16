@@ -41,7 +41,7 @@ Page({
       }
       
     ],
-    newList: [1,1,1,1], //最新数据列表
+    newList: [], //最新数据列表
     worksList: [], //作品数据列表
     directorList: [], //导演数据列表
     serviceList: [], //服务数据列表
@@ -56,6 +56,7 @@ Page({
     })
     let lastLang = this.data.language;
     this.getContent(lastLang);
+    this.getNewList()
   },
 
   onShow: function () {
@@ -67,12 +68,14 @@ Page({
         language: app.lang
       })
     };
+    let currentTab = this.data.currentTab;
     this.setData({
       // classify: [],
       goodsList: [],
-      currentTab: 0,
+      currentTab
       // category_id: 1
     })
+    
   },
 
   
@@ -117,18 +120,51 @@ Page({
     }
   },
 
+  //获取列表
+  getNewList() {
+    let that = this;
+    let newList = this.data.newList;
+    let opt = {
+      url: "index/page",
+      success: function (res) {
+        newList = res.data.data.list.data;
+        newList.forEach((v) => {
+          v['img_url'] = v.film_url + '?vframe/jpg/offset/2';
+        })
+        that.setData({
+          newList                 
+        })
+      }
+    };
+    http.wxRequest(opt)
+  },
+
+
+
   //获取分类列表
-  getCategoryList() {
+  getCategoryList(type) {
     let that = this;
     let worksList = this.data.worksList;
+    let serviceList = this.data.serviceList;
     let opt = {
+      data: {
+        type: type
+      },
       url: "Category/lists",
       success: function (res) {
-        worksList = res.data.data;
-        console.log(res)
-        that.setData({
-          worksList
-        })
+        if (type == 0) {
+          worksList = res.data.data;
+          that.setData({
+            worksList
+          })
+        }
+        else if (type == 1) {
+          serviceList = res.data.data;
+          that.setData({
+            serviceList
+          })
+        }
+        
       }
     };
     http.wxRequest(opt)
@@ -154,6 +190,14 @@ Page({
     http.wxRequest(opt)
   },
 
+  //点击选中图片跳转到最新作品详情
+  checkTab(e) {
+    let goods_id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '../detail/detail?goods_id=' + goods_id,
+    })
+  },
+
   //跳转到作品详情列表
   toWorkDetail(e) {
     console.log(e)
@@ -166,10 +210,17 @@ Page({
 
   //跳转到导演详情
   toDetail(e) {
-    console.log(e.currentTarget.dataset.id)
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '../director_detail/director_detail?id=' + id,
+    })
+  },
+
+  //跳转到服务详情
+  toserviceDetail(e) {
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../service_detail/service_detail?id=' + id,
     })
   },
 
@@ -185,14 +236,15 @@ Page({
     })
     let currentTab = this.data.currentTab;
     if ( currentTab == 1 ) {
-      _this.getCategoryList()
+      _this.getCategoryList(0)
       // _this.setData({
       //   currentTab: e.currentTarget.dataset.idx,
       // })
     } else if (currentTab == 2 ) {
-      console.log(1)
       _this.getDirectorLists()
-    }  
+    } else if (currentTab == 3) {
+      _this.getCategoryList(1)
+    } 
   },
 })
 
