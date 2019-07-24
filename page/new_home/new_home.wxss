@@ -205,27 +205,34 @@ swiper-item{
   font-size: 28upx;
 }
 
-.dot-box{
+/* .dot-box{
   width:8%;
-  /* height:100rpx; */
   position:absolute;
   right: 24rpx;
   bottom: 40%;
   z-index: 999999999;
+} */
+
+.dot-box{
+  width:100%;
+  height: 100rpx;
+  position:absolute;
+  bottom: 200rpx;
+  text-align: center;
+  z-index: 99999999;
 }
 
-/* .dot-item{
+.dot-item{
   display: inline-block;
-  width:20rpx;
-  height:20rpx;
+  width:16rpx;
+  height:16rpx;
   margin-right: 20rpx;
   background-color:#fff;
   border-radius:50%;
   opacity:.5;
-} */
+}
 
-.dot-item{
-  /* display: inline-block; */
+/* .dot-item{
   width:16rpx;
   height:16rpx;
   margin-bottom: 10rpx;
@@ -233,7 +240,7 @@ swiper-item{
   background-color:#fff;
   border-radius:50%;
   opacity:.5;
-}
+} */
 
 .dot-active{
   opacity: 1!important;
