@@ -34,7 +34,11 @@
       </block>
     </ul>
   </view>
-  <view class='dot-box'></view>
+  <view class='dot-box'>
+    <block wx:for="{{goodsList}}" wx:key="unique">
+      <view class='dot-item {{currentIndex == index ? "dot-active" : ""}}'></view>
+    </block>
+  </view>
 </view>
 <view class="item-box" wx:if="{{currentTab == 1}}">
   <scroll-view scroll-y 

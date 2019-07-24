@@ -6,9 +6,12 @@ Page({
    */
   data: {
     imgs: [
-      '../../image/home/guide1.png',
-      '../../image/home/guide2.png',
-      '../../image/home/guide3.png'
+      // '../../image/home/guide1.png',
+      // '../../image/home/guide2.png',
+      // '../../image/home/guide3.png'
+      'http://cdn.zjwoo.com/start01.png',
+      'http://cdn.zjwoo.com/start02.png',
+      'http://cdn.zjwoo.com/start03.png'
     ],
   },
 

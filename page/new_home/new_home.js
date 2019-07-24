@@ -46,7 +46,8 @@ Page({
     directorList: [], //导演数据列表
     serviceList: [], //服务数据列表
     height: 0,
-    scrollHeight: 0
+    scrollHeight: 0,
+    currentIndex: 0,
   },
 
   /**
@@ -425,14 +426,14 @@ Page({
     // let pagenum = this.data.pagenum + 1;
     let datas = this.data.goodsList;
     /*图片分布*/
-    for (var i = 0; i < datas.length; i++) {
-      // if(i==9){
-      //   that.setData({
-      //     pagenum,
-      //   })
-      //   that.getGoodsLists()
-      // }
+    for (let i = 0; i < datas.length; i++) {
+      console.log("move")
       var data = datas[i];
+      if(data['opacity'] == 1) {
+        that.setData({
+          currentIndex: i
+        })
+      }
       // console.log(data)
       var animation = wx.createAnimation({
         duration: 200
