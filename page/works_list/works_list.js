@@ -35,7 +35,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    // console.log(options)
     this.setData({
       language: app.lang,
       category_id: options.id,
@@ -86,7 +86,7 @@ Page({
       //   that.getGoodsLists()
       // }
       var data = datas[i];
-      console.log(data)
+      // console.log(data)
       var animation = wx.createAnimation({
         duration: 200
       });
@@ -114,7 +114,7 @@ Page({
   },
   //手指触发开始移动
   moveStart: function (e) {
-    console.log(e);
+    // console.log(e);
     // var startX = e.changedTouches[0].pageX;
     var startY = e.changedTouches[0].pageY;
     this.setData({
@@ -123,7 +123,7 @@ Page({
   },
   //手指触摸后移动完成触发事件
   moveItem: function (e) {
-    console.log(e);
+    // console.log(e);
     var that = this;
     // var endX = e.changedTouches[0].pageX;
     var endY = e.changedTouches[0].pageY;
@@ -133,7 +133,7 @@ Page({
     //计算手指触摸偏移剧距离
     // var moveY = this.data.startY - this.data.endY;
     var moveY = this.data.endY - this.data.startY;
-    console.log(moveY)
+    // console.log(moveY)
     //向左移动
     if (moveY > 20) {
       this.down();
@@ -169,7 +169,7 @@ Page({
       url: "Category/lists",
       success: function (res) {
         classify = res.data.data;
-        console.log(res)
+        // console.log(res)
         that.setData({
           classify
         })
@@ -234,7 +234,7 @@ Page({
         goodsList = res.data.data.data;
         let middle = Math.ceil(goodsList.length / 2) - 1;
         let viewHeight = that.data.height;
-        console.log(middle)
+        // console.log(middle)
         goodsList.forEach((v, i) => {
           v['img_url'] = v.film_url + '?vframe/jpg/offset/2';
           if (i == middle) {
@@ -311,7 +311,7 @@ Page({
         goodsList = res.data.data.data;
         let middle = Math.ceil(goodsList.length / 2) - 1;
         let viewHeight = that.data.height;
-        console.log(middle)
+        // console.log(middle)
         goodsList.forEach((v, i) => {
           v['img_url'] = v.image.file_path;
           if (i == middle) {
@@ -384,7 +384,7 @@ Page({
 
   //轮播图的切换事件 
   swiperChange: function (e) {
-    console.log(e.detail.source);
+    // console.log(e.detail.source);
     if (e.detail.source == "touch") {
       this.setData({
         swiperCurrent: e.detail.current  //获取当前轮播图片的下标
@@ -420,7 +420,7 @@ Page({
 
   //点击选中图片跳转详情
   checkTab2(e) {
-    console.log(e);
+    // console.log(e);
     let id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '../director_detail/director_detail?id=' + id,
@@ -429,7 +429,7 @@ Page({
 
   //点击切换，滑块index赋值
   navbarTap: function (e) {
-    console.log(e);
+    // console.log(e);
     let sign = e.currentTarget.dataset.sign;
     let _this = this;
     if (sign == "vedio") {

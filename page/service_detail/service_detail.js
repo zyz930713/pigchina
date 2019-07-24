@@ -26,7 +26,7 @@ Page({
    */
   onLoad: function (options) {
     // this.getConfig();
-    console.log(options)
+    // console.log(options)
     this.setData({
       language: app.lang,
       id: options.id
@@ -43,7 +43,7 @@ Page({
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
-      console.log(this.getTabBar())
+      // console.log(this.getTabBar())
       this.getTabBar().setData({
         selected: 2,
         language: app.lang
@@ -80,7 +80,7 @@ Page({
       url: "Index/getConfig",
       success: function (res) {
         configInfo = res.data.data;
-        console.log(res)
+        // console.log(res)
         that.setData({
           configInfo
         })
@@ -100,7 +100,7 @@ Page({
       },
       url: "Goods/lists",
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         serviceInfo = res.data.data.data[0]
         that.setData({
           serviceInfo

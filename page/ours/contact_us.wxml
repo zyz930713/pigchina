@@ -24,12 +24,20 @@
       </view>
     </view>
   </view>
-  <view class='aboutUs-location'>
-    <view class='aboutUs-location_item'>
+  <view class='aboutUs-location' catchtap='toMap'>
+    <!-- <view class='aboutUs-location_item'>
       <image src='{{configInfo.image_one_file}}'></image>
     </view>
     <view class='aboutUs-location_item' bindtap='toMap'>
       <image src='{{configInfo.image_two_file}}'></image>
-    </view>
+    </view> -->
+
+    <view class="" hover-class="none" hover-stop-propagation="false" style="width: 100%; height: 100%;">
+
+    <map id="map" longitude="{{configInfo.longitude}}" latitude="{{configInfo.latitude}}" markers="{{markers}}" scale="18" show-location style="width: 100%; height: 100%;"></map>
+    {{longitude}}
+
+  </view>
+
   </view>
 </view>

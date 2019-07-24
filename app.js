@@ -1,6 +1,33 @@
 App({
+  onLaunch: function() {
+    var isFir = wx.getStorageSync('isFirst');
+    if(isFir) {
+      console.log(1)
+      wx.switchTab({
+        url: 'page/new_home/new_home',
+      })
+    } else {
+      console.log(0)
+      wx.navigateTo({
+        url: 'page/launch/launch',
+      })
+    }
+  },
+
   onShow: function (e) {
     var t = this;
+    var isFir = wx.getStorageSync('isFirst');
+    if (isFir) {
+      console.log(1)
+      wx.switchTab({
+        url: 'page/new_home/new_home',
+      })
+    } else {
+      console.log(0)
+      wx.redirectTo({
+        url: 'page/launch/launch',
+      })
+    }
     try {
       var n = wx.getUpdateManager();
       n.onCheckForUpdate(function (e) {
@@ -19,7 +46,5 @@ App({
       console.log(e);
     }
   },
-  lang: "zh"  //语言信息
-
-
+  lang: "zh",  //语言信息
 })

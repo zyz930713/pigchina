@@ -41,28 +41,43 @@ Page({
       }
       
     ],
-    newList: [], //最新数据列表
+    goodsList: [], //最新数据列表
     worksList: [], //作品数据列表
     directorList: [], //导演数据列表
     serviceList: [], //服务数据列表
+    height: 0,
+    scrollHeight: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      language: app.lang
+    let that = this
+    let height = this.data.height
+    // let scrollHeight = height - 150
+    
+    // wx.getSystemInfo({
+    //   success(res) {
+    //     // console.log(res.windowWidth)
+    //     // console.log(res.windowHeight)
+        
+    //   }
+    // })
+    that.setData({
+      language: app.lang,
     })
     let lastLang = this.data.language;
     this.getContent(lastLang);
-    this.getNewList()
+    this.__set__();
+    this.move();
+    this.getHeight();
   },
 
   onShow: function () {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
-      console.log(this.getTabBar())
+      // console.log(this.getTabBar())
       this.getTabBar().setData({
         selected: 1,
         language: app.lang
@@ -75,7 +90,11 @@ Page({
       currentTab
       // category_id: 1
     })
-    
+    if (currentTab == 0){
+      this.getNewList();
+    } else if (currentTab == 2){
+      this.getDirectorLists();
+    }
   },
 
   
@@ -123,17 +142,71 @@ Page({
   //获取列表
   getNewList() {
     let that = this;
-    let newList = this.data.newList;
+    let goodsList = this.data.goodsList;
     let opt = {
       url: "index/page",
       success: function (res) {
-        newList = res.data.data.list.data;
-        newList.forEach((v) => {
+        goodsList = res.data.data.list.data;
+        // console.log(goodsList)
+        let middle = Math.ceil(goodsList.length / 2) - 1;
+        let viewHeight = that.data.height;
+        // console.log(middle)
+        goodsList.forEach((v, i) => {
           v['img_url'] = v.film_url + '?vframe/jpg/offset/2';
+          if (i == middle) {
+            v['zIndex'] = 10;
+            v['opacity'] = 1;
+            v['scale'] = 1.8;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 200;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 120;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 280;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 40;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 360;
+            v['animation'] = null;
+          }
+          else {
+            v['zIndex'] = 6;
+            v['opacity'] = 0;
+            v['scale'] = 1;
+            v['top'] = (i + 1) * 80;
+            v['animation'] = null;
+          }
         })
+        // console.log(res)
         that.setData({
-          newList                 
+          goodsList
         })
+        that.__set__();
+        that.move();
       }
     };
     http.wxRequest(opt)
@@ -171,20 +244,97 @@ Page({
   },
 
   //获取导演列表
+  // getDirectorLists() {
+  //   let that = this;
+  //   let directorList = this.data.directorList;
+  //   let opt = {
+  //     data: {
+  //       // pageSize: 10,
+  //     },
+  //     url: "Director/lists",
+  //     success: function (res) {
+  //       // console.log(res.data.data.data)
+  //       directorList = res.data.data.data;
+  //       that.setData({
+  //         directorList
+  //       })
+  //     }
+  //   };
+  //   http.wxRequest(opt)
+  // },
+
+  //获取导演列表
   getDirectorLists() {
     let that = this;
-    let directorList = this.data.directorList;
+    let goodsList = this.data.goodsList;
     let opt = {
       data: {
+        // page: pagenum,
         // pageSize: 10,
+        // keywords
       },
       url: "Director/lists",
       success: function (res) {
-        console.log(res.data.data.data)
-        directorList = res.data.data.data;
-        that.setData({
-          directorList
+        goodsList = res.data.data.data;
+        let middle = Math.ceil(goodsList.length / 2) - 1;
+        let viewHeight = that.data.height;
+        console.log(middle)
+        goodsList.forEach((v, i) => {
+          v['img_url'] = v.image.file_path;
+          if (i == middle) {
+            v['zIndex'] = 10;
+            v['opacity'] = 1;
+            v['scale'] = 1.8;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 200;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 120;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 280;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 40;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 360;
+            v['animation'] = null;
+          }
+          else {
+            v['zIndex'] = 6;
+            v['opacity'] = 0;
+            v['scale'] = 1;
+            v['top'] = (i + 1) * 80;
+            v['animation'] = null;
+          }
         })
+        // console.log(res)
+        that.setData({
+          goodsList
+        })
+        that.__set__();
+        that.move();
       }
     };
     http.wxRequest(opt)
@@ -200,7 +350,7 @@ Page({
 
   //跳转到作品详情列表
   toWorkDetail(e) {
-    console.log(e)
+    // console.log(e)
     let id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
     wx.navigateTo({
@@ -226,7 +376,7 @@ Page({
 
   //点击切换，滑块index赋值
   navbarTap: function (e) {
-    console.log(e);
+    // console.log(e);
     let _this = this;
     // let currentTab = this.data.currentTab;
     // let sign = e.currentTarget.dataset.sign;
@@ -244,7 +394,118 @@ Page({
       _this.getDirectorLists()
     } else if (currentTab == 3) {
       _this.getCategoryList(1)
-    } 
+    } else if (currentTab == 0) {
+      _this.getNewList()
+    }
+  },
+
+  getHeight() {
+    let that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        let clientHeight = res.windowHeight;
+        if ( clientHeight < 720 ){
+          that.setData({
+            height: clientHeight + 50,
+            scrollHeight: 450
+          })
+        } else {
+          that.setData({
+            height: clientHeight,
+            scrollHeight: 610
+          })
+        }
+        
+      },
+    })
+  },
+
+  move: function () {
+    let that = this;
+    // let pagenum = this.data.pagenum + 1;
+    let datas = this.data.goodsList;
+    /*图片分布*/
+    for (var i = 0; i < datas.length; i++) {
+      // if(i==9){
+      //   that.setData({
+      //     pagenum,
+      //   })
+      //   that.getGoodsLists()
+      // }
+      var data = datas[i];
+      // console.log(data)
+      var animation = wx.createAnimation({
+        duration: 200
+      });
+      // animation.translateX(data.left).step();
+      animation.translateY(data.top).step();
+      this.setData({
+        ["goodsList[" + i + "].animation"]: animation.export(),
+        ["goodsList[" + i + "].zIndex"]: data.zIndex,
+        ["goodsList[" + i + "].opacity"]: data.opacity,
+        ["goodsList[" + i + "].scale"]: data.scale,
+      })
+    }
+  },
+
+  /**新的排列复制到新的数组中 */
+  __set__: function () {
+    var that = this;
+    var order = that.data.order;
+    var datas = that.data.goodsList;
+    for (var i = 0; i < datas.length; i++) {
+      that.setData({
+        ["order[" + i + "]"]: datas[i].goods_id
+      })
+    }
+  },
+  //手指触发开始移动
+  moveStart: function (e) {
+    // console.log(e);
+    // var startX = e.changedTouches[0].pageX;
+    var startY = e.changedTouches[0].pageY;
+    this.setData({
+      startY: startY
+    });
+  },
+  //手指触摸后移动完成触发事件
+  moveItem: function (e) {
+    // console.log(e);
+    var that = this;
+    // var endX = e.changedTouches[0].pageX;
+    var endY = e.changedTouches[0].pageY;
+    this.setData({
+      endY: endY
+    });
+    //计算手指触摸偏移剧距离
+    // var moveY = this.data.startY - this.data.endY;
+    var moveY = this.data.endY - this.data.startY;
+    // console.log(moveY)
+    //向左移动
+    if (moveY > 20) {
+      this.down();
+    }
+    if (moveY < -20) {
+      this.up();
+    }
+  },
+
+  /**上移 */
+  up: function () {
+    //
+    var last = this.data.goodsList.pop(); //获取数组的最后一个
+    this.data.goodsList.unshift(last);//放到数组的第一个
+    var orderFirst = this.data.order.shift();
+    this.data.order.push(orderFirst);
+    this.move();
+  },
+  /**下移 */
+  down: function () {
+    var first = this.data.goodsList.shift(); //获取数组的第一个
+    this.data.goodsList.push(first);//放到数组的最后一个位置
+    var orderLast = this.data.order.pop();
+    this.data.order.unshift(orderLast);
+    this.move();
   },
 })
 

@@ -17,6 +17,14 @@ Page({
     language: "",
     content: "", //自定义字段
     configInfo: {}, //配置信息 
+    markers: [{
+      id: 0,
+      iconPath: "../../images/icon_cur_position.png",
+      latitude: 23.099994,
+      longitude: 113.324520,
+      width: 50,
+      height: 50
+    }]
   },
 
   /**
@@ -29,6 +37,8 @@ Page({
     })
     let lastLang = this.data.language;
     this.getContent(lastLang);
+    
+
   },
 
   /**
@@ -75,7 +85,11 @@ Page({
         configInfo = res.data.data;
         console.log(res)
         that.setData({
-          configInfo
+          configInfo: configInfo,
+          markers: [{
+            latitude: configInfo.latitude,
+            longitude: configInfo.longitude
+          }]
         })
       }
     };

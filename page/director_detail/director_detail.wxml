@@ -17,6 +17,7 @@
         <block wx:for="{{detailInfo.list}}" wx:key="*this">
           <swiper-item class="slide-swiper {{ index==swiperCurrent ? 'swiperActive' : '' }} ">
             <image src="{{item.imgUrl}}" class="slide-image {{ index==swiperCurrent ? 'active' : '' }}" bindchange="chuangEvent" data-index="{{index}}" id="{{index}}" data-id="{{item.goods_id}}" mode='aspectFit' bindtap='checkTab' />
+            <image src='../../image/home/player.png' data-index="{{index}}" data-id="{{item.goods_id}}" class='player-icon' bindtap='checkTab' />
             <view class='director_works_title' wx:if="{{language == 'zh'}}">{{item.goods_name}}</view>
             <view class='director_works_title' wx:if="{{language == 'en'}}">{{item.en_goods_name}}</view>
           </swiper-item>

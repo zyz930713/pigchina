@@ -1,5 +1,6 @@
 {
   "pages": [
+    "page/launch/launch",
     "page/new_home/new_home",
     "page/home/home",
     "page/ours/ours",
