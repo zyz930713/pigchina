@@ -48,6 +48,11 @@ Page({
     height: 0,
     scrollHeight: 0,
     currentIndex: 0,
+    directorIndex: 0,
+    workTab: 0, //切换为作品类目
+    category_name: "", //当前选中的分类名称
+    category_work_id: 1,
+    serviceInfo: [] 
   },
 
   /**
@@ -76,6 +81,7 @@ Page({
   },
 
   onShow: function () {
+    let that = this
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       // console.log(this.getTabBar())
@@ -86,15 +92,22 @@ Page({
     };
     let currentTab = this.data.currentTab;
     this.setData({
-      // classify: [],
+      workTab:0,
       goodsList: [],
-      currentTab
+      currentTab,
+      serviceInfo: []
       // category_id: 1
     })
     if (currentTab == 0){
       this.getNewList();
     } else if (currentTab == 2){
-      this.getDirectorLists();
+      let index = that.data.currentIndex;
+      this.getDirectorLists(index);
+    } else if (currentTab == 1) {
+      // this.getWorkList();
+      this.getGoodsLists(); 
+    } else if (currentTab == 3) {
+
     }
   },
 
@@ -147,7 +160,7 @@ Page({
     let opt = {
       url: "index/page",
       success: function (res) {
-        goodsList = res.data.data.list.data;
+        goodsList = res.data.data.list;
         // console.log(goodsList)
         let middle = Math.ceil(goodsList.length / 2) - 1;
         let viewHeight = that.data.height;
@@ -244,6 +257,85 @@ Page({
     http.wxRequest(opt)
   },
 
+  //获取电影列表
+  getGoodsLists(category_id) {
+    let that = this;
+    let goodsList = this.data.goodsList;
+    // let category_id = category_id;
+    // let pageNum = this.data.pagenum;
+    let opt = {
+      data: {
+        pageSize: 10,
+        category_id,
+        // page: pageNum,
+      },
+      url: "Goods/lists",
+      success: function (res) {
+        goodsList = res.data.data.data;
+        let middle = Math.ceil(goodsList.length / 2) - 1;
+        let viewHeight = that.data.height;
+        // console.log(middle)
+        goodsList.forEach((v, i) => {
+          v['img_url'] = v.film_url + '?vframe/jpg/offset/2';
+          if (i == middle) {
+            v['zIndex'] = 10;
+            v['opacity'] = 1;
+            v['scale'] = 1.8;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 200;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 120;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 1)) {
+            v['zIndex'] = 8;
+            v['opacity'] = 0.8;
+            v['scale'] = 1.4;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 280;
+            v['animation'] = null;
+          }
+          else if (i == (middle - 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 40;
+            v['animation'] = null;
+          }
+          else if (i == (middle + 2)) {
+            v['zIndex'] = 6;
+            v['opacity'] = 0.4;
+            v['scale'] = 1;
+            // v['top'] = (i + 1) * 80;
+            v['top'] = 360;
+            v['animation'] = null;
+          }
+          else {
+            v['zIndex'] = 6;
+            v['opacity'] = 0;
+            v['scale'] = 1;
+            v['top'] = (i + 1) * 80;
+            v['animation'] = null;
+          }
+        })
+        // console.log(res)
+        that.setData({
+          goodsList
+        })
+        that.__set__();
+        that.move();
+      }
+    };
+    http.wxRequest(opt)
+  },
+
   //获取导演列表
   // getDirectorLists() {
   //   let that = this;
@@ -265,7 +357,8 @@ Page({
   // },
 
   //获取导演列表
-  getDirectorLists() {
+  getDirectorLists(index) {
+    console.log(index)
     let that = this;
     let goodsList = this.data.goodsList;
     let opt = {
@@ -277,7 +370,12 @@ Page({
       url: "Director/lists",
       success: function (res) {
         goodsList = res.data.data.data;
-        let middle = Math.ceil(goodsList.length / 2) - 1;
+        let middle;
+        if (index){
+          middle = index
+        } else {
+          middle = Math.ceil(goodsList.length / 2) - 1;
+        }
         let viewHeight = that.data.height;
         console.log(middle)
         goodsList.forEach((v, i) => {
@@ -352,16 +450,25 @@ Page({
   //跳转到作品详情列表
   toWorkDetail(e) {
     // console.log(e)
-    let id = e.currentTarget.dataset.id
+    let category_id = e.currentTarget.dataset.id
     let name = e.currentTarget.dataset.name
-    wx.navigateTo({
-      url: '../works_list/works_list?id=' + id + '&name=' + name,
+    this.setData({
+      workTab: 1,
+      category_name: name,
+      // category_work_id: id
     })
+    this.getGoodsLists(category_id)
+    // wx.navigateTo({
+    //   url: '../works_list/works_list?id=' + id + '&name=' + name,
+    // })
   },
 
   //跳转到导演详情
   toDetail(e) {
     let id = e.currentTarget.dataset.id
+    this.setData({
+      directorIndex: id
+    })
     wx.navigateTo({
       url: '../director_detail/director_detail?id=' + id,
     })
@@ -370,9 +477,34 @@ Page({
   //跳转到服务详情
   toserviceDetail(e) {
     let id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '../service_detail/service_detail?id=' + id,
+    this.setData({
+      workTab: 2,
     })
+    this.getServiceLists(id)
+    // wx.navigateTo({
+    //   url: '../service_detail/service_detail?id=' + id,
+    // })
+  },
+
+  getServiceLists(id) {
+    let that = this;
+    let serviceInfo = this.data.serviceInfo;
+    // let category_id = this.data.category_id;
+    // let pageNum = this.data.pagenum;
+    let opt = {
+      data: {
+        category_id: id
+      },
+      url: "Goods/lists",
+      success: function (res) {
+        // console.log(res)
+        serviceInfo = res.data.data.data[0]
+        that.setData({
+          serviceInfo
+        })
+      }
+    };
+    http.wxRequest(opt)
   },
 
   //点击切换，滑块index赋值
@@ -508,5 +640,12 @@ Page({
     this.data.order.unshift(orderLast);
     this.move();
   },
+
+  goBack() {
+    console.log(11)
+    this.setData({
+      workTab: 0
+    })
+  }
 })
 

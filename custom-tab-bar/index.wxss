@@ -41,6 +41,7 @@
   width: 150rpx!important;
   height: 150rpx!important;
   z-index: 999;
+  /* box-shadow: 10rpx 10rpx 5rpx #888888; */
 }
 
 .tab-bar-item image {

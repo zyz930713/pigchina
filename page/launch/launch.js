@@ -24,7 +24,7 @@ Page({
 
   start() {
     // console.log(1)
-    wx.setStorageSync('isFirst', 'no')
+    // wx.setStorageSync('isFirst', 'no')
     wx.switchTab({
       url: '../new_home/new_home',
     })

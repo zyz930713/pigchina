@@ -126,6 +126,16 @@ Page({
     })
   },
 
+  //长按复制
+  copy(e) {
+    console.log(e)
+  },
+
+  goBack() {
+    this.getTabBar().setData({
+      selected: 1,
+    })
+  }
 
 
 })

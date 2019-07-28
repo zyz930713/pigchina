@@ -1,5 +1,8 @@
 <!--page/ours/contact_us.wxml-->
 <view class='container'>
+  <view class="back-box" bindtap="goBack">
+    <image src="../../image/home/back-arrow.png"></image>
+  </view>
   <view class='aboutUs-logo'>
     <image src='../../image/ours/logo.png'></image>
   </view>
@@ -12,11 +15,11 @@
       </view>
       <view class='aboutUs-contact_item'>
         <image src='../../image/ours/e-mail.png'></image>
-        <text>{{configInfo.email}}</text>
+        <text selectable='true'>{{configInfo.email}}</text>
       </view>
       <view class='aboutUs-contact_item' wx:if="{{language == 'zh'}}">
         <image src='../../image/ours/location.png'></image>
-        <text>{{configInfo.address}}</text>
+        <text selectable='true'>{{configInfo.address}}</text>
       </view>
       <view class='aboutUs-contact_item' wx:if="{{language == 'en'}}">
         <image src='../../image/ours/location.png'></image>

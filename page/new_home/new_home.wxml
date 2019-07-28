@@ -1,5 +1,6 @@
 <!--page/new_home/new_home.wxml-->
-<view class='lang-change' bindtap='changeLang'>
+<view wx:if="{{workTab == 0}}">
+  <view class='lang-change' bindtap='changeLang'>
   中文/English
 </view>
 <view class='navbar'>
@@ -30,6 +31,10 @@
         <li animation="{{item.animation}}" style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};" catchtap='checkTab' data-id="{{item.goods_id}}">
           <image class='slide-image' src="{{item.img_url}}" title="" style="transform:scale({{item.scale}})"></image>
           <image src='../../image/home/player.png' data-index="{{index}}" class='player-icon' />
+          <view class="info-box" style='opacity:{{item.opacity}}'>
+            <text wx:if="{{language == 'zh'}}">{{item.goods_name}}</text>
+            <text wx:if="{{language == 'en'}}">{{item.en_goods_name}}</text>
+          </view>
         </li>
       </block>
     </ul>
@@ -94,7 +99,7 @@
 <view class="item-box" wx:if="{{currentTab == 3}}">
   <scroll-view scroll-y style='height:{{scrollHeight}}px;padding-bottom:220rpx'>
     <block wx:if="{{language == 'zh'}}">
-      <view class="item-box_sub" style='opacity:0.4' wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
+      <view class="item-box_sub" wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
         <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
         <view>
           <text spaace="true" decode='&amp;'>{{item.name}}</text>
@@ -102,7 +107,7 @@
       </view>
     </block>
     <block wx:if="{{language == 'en'}}">
-      <view class="item-box_sub" style='opacity:0.4' wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
+      <view class="item-box_sub" wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
         <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
         <view>
           <text spaace="true" decode='&amp;'>{{item.en_name}}</text>
@@ -111,8 +116,84 @@
     </block>
   </scroll-view>
 </view>
+</view>
+
+<view wx:if="{{workTab == 1}}">
+  <view class="back-box" bindtap="goBack">
+    <image src="../../image/home/back-arrow.png"></image>
+  </view>
+  <view class='work-navbar'>
+  <view wx:if="{{language == 'zh'}}">作品 | {{category_name}}</view>
+  <view wx:if="{{language == 'en'}}">WORKS | {{category_name}}</view>
+</view>
+<view 
+  class='banner-swiper' 
+  wx:for="{{worksList}}"
+  wx:for-item="classifyItem" 
+  wx:key="unique"
+  hidden="{{currentTab!==index}}"
+>
+  <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem'>
+      <ul>
+        <block wx:for="{{goodsList}}" wx:key="unique">
+          <li animation="{{item.animation}}"  style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};"
+            catchtap='checkTab' data-id="{{item.goods_id}}"
+          >
+            <image 
+              class='slide-image'
+              src="{{item.img_url}}" 
+              title=""
+              style="transform:scale({{item.scale}})"
+            ></image>
+            <image 
+              src='../../image/home/player.png'
+              data-index="{{index}}"
+              class='player-icon'
+            />
+          </li>
+        </block>
+      </ul>
+  </view>
+</view>
+</view>
+
+<view wx:if="{{workTab == 2}}">
+  <view class="container">
+  <view class="back-box" bindtap="goBack">
+    <image src="../../image/home/back-arrow.png"></image>
+  </view>
+  <view class='aboutUs-logo'>
+    <image src='../../image/ours/logo.png'></image>
+  </view>
+  <view class='aboutUs-des' wx:if="{{language == 'zh'}}">
+    <view class='aboutUs-des_header'>{{serviceInfo.goods_name}}</view>
+    <view class='aboutUs-des_content'>
+      <text>{{serviceInfo.content}}</text>
+    </view>
+    <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
+      <text>{{configInfo.en_aboutus}}</text>
+    </view> -->
+  </view>
+  <view class='aboutUs-des' wx:if="{{language == 'en'}}">
+    <view class='aboutUs-des_header'>{{serviceInfo.en_goods_name}}</view>
+    <view class='aboutUs-des_content'>
+      <text>{{serviceInfo.en_content}}</text>
+    </view>
+    <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
+      <text>{{configInfo.en_aboutus}}</text>
+    </view> -->
+  </view>
+  <!-- <view class='contact-btn'>
+    <button bindtap='toContactUs'>{{content.contactUs}}</button>
+  </view> -->
+  
+</view>
+</view>
+
 <!-- <i-load-more tip="暂无数据" wx:if="{{goodsList.length < 1}}" /> -->
 <!-- <view class='no-info' wx:if="{{goodsList.length <= 1}}">
   {{content.noData}}
 </view> -->
 <i-toast id="toast" />
+<!-- 添加到小程序 -->
+<add-tips />

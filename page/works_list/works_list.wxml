@@ -3,7 +3,7 @@
 
 <view class='navbar'>
   <view wx:if="{{language == 'zh'}}">作品 | {{category_name}}</view>
-  <view wx:if="{{language == 'en'}}">WORK | {{category_name}}</view>
+  <view wx:if="{{language == 'en'}}">WORKS | {{category_name}}</view>
 </view>
 <view 
   class='banner-swiper' 
