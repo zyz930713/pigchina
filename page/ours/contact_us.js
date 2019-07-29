@@ -132,6 +132,9 @@ Page({
   },
 
   goBack() {
+    console.log("back")
+    let url = '/page/new_home/new_home'
+    wx.switchTab({ url })
     this.getTabBar().setData({
       selected: 1,
     })

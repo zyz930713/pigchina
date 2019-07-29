@@ -1,4 +1,7 @@
 <view class="container">
+  <view class="back-box" bindtap="goBack">
+    <image src="../../image/home/back-arrow.png"></image>
+  </view>
   <view class='aboutUs-logo'>
     <image src='../../image/ours/logo.png'></image>
   </view>

@@ -1,18 +1,18 @@
 <!--page/new_home/new_home.wxml-->
 <view wx:if="{{workTab == 0}}">
   <view class='lang-change' bindtap='changeLang'>
-  中文/English
-</view>
-<view class='navbar'>
-  <block wx:if="{{language == 'zh'}}">
-    <text class='item {{currentTab == index ? "tab_active" : ""}}' wx:for="{{classify}}" wx:key="unique" data-idx="{{item.id}}" bindtap='navbarTap'>{{item.name}}</text>
-  </block>
-  <block wx:if="{{language == 'en'}}">
-    <text class='item {{currentTab == index ? "tab_active" : ""}}' wx:for="{{classify}}" wx:key="unique" data-idx="{{item.id}}" bindtap='navbarTap'>{{item.en_name}}</text>
-  </block>
-</view>
-<view class="item-box" style="padding-bottom: 0;" wx:if="{{currentTab == 0}}">
-  <!-- <block wx:if="{{language == 'zh'}}">
+    中文/English
+  </view>
+  <view class='navbar'>
+    <block wx:if="{{language == 'zh'}}">
+      <text class='item {{currentTab == index ? "tab_active" : ""}}' wx:for="{{classify}}" wx:key="unique" data-idx="{{item.id}}" bindtap='navbarTap'>{{item.name}}</text>
+    </block>
+    <block wx:if="{{language == 'en'}}">
+      <text class='item {{currentTab == index ? "tab_active" : ""}}' wx:for="{{classify}}" wx:key="unique" data-idx="{{item.id}}" bindtap='navbarTap'>{{item.en_name}}</text>
+    </block>
+  </view>
+  <view class="item-box" style="padding-bottom: 0;" wx:if="{{currentTab == 0}}">
+    <!-- <block wx:if="{{language == 'zh'}}">
     <view class="item-box_sub" wx:for="{{newList}}" wx:key="unique" data-id='{{item.goods_id}}' catchtap='checkTab'>
       <image src='{{item.film_url}}?vframe/jpg/offset/2/imageView2/1/w/200/h/200'></image>
       <view>{{item.goods_name}}</view>
@@ -24,51 +24,49 @@
       <view>{{item.en_goods_name}}</view>
     </view>
   </block> -->
-  <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem' 
-    style='height:{{height}}px'>
-    <ul>
+    <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem' style='height:{{height}}px'>
+      <ul>
+        <block wx:for="{{goodsList}}" wx:key="unique">
+          <li animation="{{item.animation}}" style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};" catchtap='checkTab' data-id="{{item.goods_id}}">
+            <image class='slide-image' src="{{item.img_url}}" title="" style="transform:scale({{item.scale}})"></image>
+            <image src='../../image/home/player.png' data-index="{{index}}" class='player-icon' />
+            <view class="info-box" style='opacity:{{item.opacity}}'>
+              <text wx:if="{{language == 'zh'}}">{{item.goods_name}}</text>
+              <text wx:if="{{language == 'en'}}">{{item.en_goods_name}}</text>
+            </view>
+          </li>
+        </block>
+      </ul>
+    </view>
+    <view class='dot-box'>
       <block wx:for="{{goodsList}}" wx:key="unique">
-        <li animation="{{item.animation}}" style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};" catchtap='checkTab' data-id="{{item.goods_id}}">
-          <image class='slide-image' src="{{item.img_url}}" title="" style="transform:scale({{item.scale}})"></image>
-          <image src='../../image/home/player.png' data-index="{{index}}" class='player-icon' />
-          <view class="info-box" style='opacity:{{item.opacity}}'>
-            <text wx:if="{{language == 'zh'}}">{{item.goods_name}}</text>
-            <text wx:if="{{language == 'en'}}">{{item.en_goods_name}}</text>
-          </view>
-        </li>
+        <view class='dot-item {{currentIndex == index ? "dot-active" : ""}}'></view>
       </block>
-    </ul>
+    </view>
   </view>
-  <view class='dot-box'>
-    <block wx:for="{{goodsList}}" wx:key="unique">
-      <view class='dot-item {{currentIndex == index ? "dot-active" : ""}}'></view>
-    </block>
+  <view class="item-box" wx:if="{{currentTab == 1}}">
+    <scroll-view scroll-y style='height:{{scrollHeight}}px;padding-bottom:220rpx'>
+      <block wx:if="{{language == 'zh'}}">
+        <view class="{{item.name != '其他' ? 'item-box_sub' : 'item-box_more'}}" wx:for="{{worksList}}" wx:key="unique" data-id='{{item.category_id}}' data-name="{{item.name}}" bindtap='toWorkDetail'>
+          <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
+          <view>
+            <text spaace="true" decode='&amp;'>{{item.name}}</text>
+          </view>
+        </view>
+      </block>
+      <block wx:if="{{language == 'en'}}">
+        <view class="{{item.name != '其他' ? 'item-box_sub' : 'item-box_more'}}" wx:for="{{worksList}}" wx:key="unique" data-id='{{item.category_id}}' data-name="{{item.en_name}}" bindtap='toWorkDetail'>
+          <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
+          <view>
+            <text spaace="true" decode='&amp;'>{{item.en_name}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <!-- <view class='item-box_more'></view> -->
   </view>
-</view>
-<view class="item-box" wx:if="{{currentTab == 1}}">
-  <scroll-view scroll-y 
-  style='height:{{scrollHeight}}px;padding-bottom:220rpx'>
-    <block wx:if="{{language == 'zh'}}">
-      <view class="{{item.name != '其他' ? 'item-box_sub' : 'item-box_more'}}" wx:for="{{worksList}}" wx:key="unique" data-id='{{item.category_id}}' data-name="{{item.name}}" bindtap='toWorkDetail'>
-        <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
-        <view>
-          <text spaace="true" decode='&amp;'>{{item.name}}</text>
-        </view>
-      </view>
-    </block>
-    <block wx:if="{{language == 'en'}}">
-      <view class="{{item.name != '其他' ? 'item-box_sub' : 'item-box_more'}}" wx:for="{{worksList}}" wx:key="unique" data-id='{{item.category_id}}' data-name="{{item.en_name}}" bindtap='toWorkDetail'>
-        <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
-        <view>
-          <text spaace="true" decode='&amp;'>{{item.en_name}}</text>
-        </view>
-      </view>
-    </block>
-  </scroll-view>
-  <!-- <view class='item-box_more'></view> -->
-</view>
-<view class="item-box" wx:if="{{currentTab == 2}}">
-  <!-- <scroll-view scroll-y style='height:860rpx'>
+  <view class="item-box" wx:if="{{currentTab == 2}}">
+    <!-- <scroll-view scroll-y style='height:860rpx'>
     <block wx:if="{{language == 'zh'}}">
       <view class="item-box_sub" wx:for="{{directorList}}" wx:key="unique" data-id='{{item.director_id}}' bindtap='toDetail' style="width:96%;height:500rpx;background:transparent">
         <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200' style="height:380rpx"></image>
@@ -82,40 +80,40 @@
       </view>
     </block>
   </scroll-view> -->
-  <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem' style='height:{{height}}px'>
-    <ul>
-      <block wx:for="{{goodsList}}" wx:key="unique">
-        <li animation="{{item.animation}}" style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};" catchtap='toDetail' data-id="{{item.director_id}}">
-          <image class='slide-image' src="{{item.img_url}}" title="" style="transform:scale({{item.scale}})"></image>
-          <view class='director-name' style='opacity:{{item.opacity}}'>
-            <text wx:if="{{language == 'zh'}}">{{item.director_name}}</text>
-            <text wx:if="{{language == 'en'}}">{{item.en_director_name}}</text>
-          </view>
-        </li>
-      </block>
-    </ul>
+    <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem' style='height:{{height}}px'>
+      <ul>
+        <block wx:for="{{goodsList}}" wx:key="unique">
+          <li animation="{{item.animation}}" style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};" catchtap='toDetail' data-id="{{item.director_id}}">
+            <image class='slide-image' src="{{item.img_url}}" title="" style="transform:scale({{item.scale}})"></image>
+            <view class='director-name' style='opacity:{{item.opacity}}'>
+              <text wx:if="{{language == 'zh'}}">{{item.director_name}}</text>
+              <text wx:if="{{language == 'en'}}">{{item.en_director_name}}</text>
+            </view>
+          </li>
+        </block>
+      </ul>
+    </view>
   </view>
-</view>
-<view class="item-box" wx:if="{{currentTab == 3}}">
-  <scroll-view scroll-y style='height:{{scrollHeight}}px;padding-bottom:220rpx'>
-    <block wx:if="{{language == 'zh'}}">
-      <view class="item-box_sub" wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
-        <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
-        <view>
-          <text spaace="true" decode='&amp;'>{{item.name}}</text>
+  <view class="item-box" wx:if="{{currentTab == 3}}">
+    <scroll-view scroll-y style='height:{{scrollHeight}}px;padding-bottom:220rpx'>
+      <block wx:if="{{language == 'zh'}}">
+        <view class="item-box_sub" wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
+          <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
+          <view>
+            <text spaace="true" decode='&amp;'>{{item.name}}</text>
+          </view>
         </view>
-      </view>
-    </block>
-    <block wx:if="{{language == 'en'}}">
-      <view class="item-box_sub" wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
-        <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
-        <view>
-          <text spaace="true" decode='&amp;'>{{item.en_name}}</text>
+      </block>
+      <block wx:if="{{language == 'en'}}">
+        <view class="item-box_sub" wx:for="{{serviceList}}" wx:key="unique" data-id='{{item.category_id}}' bindtap='toserviceDetail'>
+          <image src='{{item.image.file_path}}?imageView2/1/w/200/h/200'></image>
+          <view>
+            <text spaace="true" decode='&amp;'>{{item.en_name}}</text>
+          </view>
         </view>
-      </view>
-    </block>
-  </scroll-view>
-</view>
+      </block>
+    </scroll-view>
+  </view>
 </view>
 
 <view wx:if="{{workTab == 1}}">
@@ -123,71 +121,58 @@
     <image src="../../image/home/back-arrow.png"></image>
   </view>
   <view class='work-navbar'>
-  <view wx:if="{{language == 'zh'}}">作品 | {{category_name}}</view>
-  <view wx:if="{{language == 'en'}}">WORKS | {{category_name}}</view>
-</view>
-<view 
-  class='banner-swiper' 
-  wx:for="{{worksList}}"
-  wx:for-item="classifyItem" 
-  wx:key="unique"
-  hidden="{{currentTab!==index}}"
->
-  <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem'>
+    <view wx:if="{{language == 'zh'}}">作品 | {{category_name}}</view>
+    <view wx:if="{{language == 'en'}}">WORKS | {{category_name}}</view>
+  </view>
+  <view class='banner-swiper' wx:for="{{worksList}}" wx:for-item="classifyItem" wx:key="unique" hidden="{{currentTab!==index}}">
+    <view class="slide" id="slide" bindtouchstart='moveStart' bindtouchend='moveItem'>
       <ul>
         <block wx:for="{{goodsList}}" wx:key="unique">
-          <li animation="{{item.animation}}"  style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};"
-            catchtap='checkTab' data-id="{{item.goods_id}}"
-          >
-            <image 
-              class='slide-image'
-              src="{{item.img_url}}" 
-              title=""
-              style="transform:scale({{item.scale}})"
-            ></image>
-            <image 
-              src='../../image/home/player.png'
-              data-index="{{index}}"
-              class='player-icon'
-            />
+          <li animation="{{item.animation}}" style="z-index: {{item.zIndex}} ;opacity:{{item.opacity}};" catchtap='checkTab' data-id="{{item.goods_id}}">
+            <image class='slide-image' src="{{item.img_url}}" title="" style="transform:scale({{item.scale}})"></image>
+            <image src='../../image/home/player.png' data-index="{{index}}" class='player-icon' />
+            <view class="info-box" style='opacity:{{item.opacity}}'>
+              <text wx:if="{{language == 'zh'}}">{{item.goods_name}}</text>
+              <text wx:if="{{language == 'en'}}">{{item.en_goods_name}}</text>
+            </view>
           </li>
         </block>
       </ul>
+    </view>
   </view>
-</view>
 </view>
 
 <view wx:if="{{workTab == 2}}">
   <view class="container">
-  <view class="back-box" bindtap="goBack">
-    <image src="../../image/home/back-arrow.png"></image>
-  </view>
-  <view class='aboutUs-logo'>
-    <image src='../../image/ours/logo.png'></image>
-  </view>
-  <view class='aboutUs-des' wx:if="{{language == 'zh'}}">
-    <view class='aboutUs-des_header'>{{serviceInfo.goods_name}}</view>
-    <view class='aboutUs-des_content'>
-      <text>{{serviceInfo.content}}</text>
+    <view class="back-box" bindtap="goBack">
+      <image src="../../image/home/back-arrow.png"></image>
     </view>
-    <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
+    <view class='aboutUs-logo'>
+      <image src='../../image/ours/logo.png'></image>
+    </view>
+    <view class='aboutUs-des' wx:if="{{language == 'zh'}}">
+      <view class='aboutUs-des_header'>{{serviceInfo.goods_name}}</view>
+      <view class='aboutUs-des_content'>
+        <text>{{serviceInfo.content}}</text>
+      </view>
+      <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
       <text>{{configInfo.en_aboutus}}</text>
     </view> -->
-  </view>
-  <view class='aboutUs-des' wx:if="{{language == 'en'}}">
-    <view class='aboutUs-des_header'>{{serviceInfo.en_goods_name}}</view>
-    <view class='aboutUs-des_content'>
-      <text>{{serviceInfo.en_content}}</text>
     </view>
-    <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
+    <view class='aboutUs-des' wx:if="{{language == 'en'}}">
+      <view class='aboutUs-des_header'>{{serviceInfo.en_goods_name}}</view>
+      <view class='aboutUs-des_content'>
+        <text>{{serviceInfo.en_content}}</text>
+      </view>
+      <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
       <text>{{configInfo.en_aboutus}}</text>
     </view> -->
-  </view>
-  <!-- <view class='contact-btn'>
+    </view>
+    <!-- <view class='contact-btn'>
     <button bindtap='toContactUs'>{{content.contactUs}}</button>
   </view> -->
-  
-</view>
+
+  </view>
 </view>
 
 <!-- <i-load-more tip="暂无数据" wx:if="{{goodsList.length < 1}}" /> -->
