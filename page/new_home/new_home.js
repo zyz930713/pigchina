@@ -52,7 +52,7 @@ Page({
     workTab: 0, //切换为作品类目
     category_name: "", //当前选中的分类名称
     category_work_id: 1,
-    serviceInfo: [] 
+    serviceInfo: {}
   },
 
   /**
@@ -95,7 +95,7 @@ Page({
       workTab:0,
       goodsList: [],
       currentTab,
-      serviceInfo: []
+      serviceInfo: {}
       // category_id: 1
     })
     if (currentTab == 0){
@@ -488,7 +488,7 @@ Page({
 
   getServiceLists(id) {
     let that = this;
-    let serviceInfo = this.data.serviceInfo;
+    // let serviceInfo = this.data.serviceInfo;
     // let category_id = this.data.category_id;
     // let pageNum = this.data.pagenum;
     let opt = {
@@ -498,9 +498,11 @@ Page({
       url: "Goods/lists",
       success: function (res) {
         // console.log(res)
-        serviceInfo = res.data.data.data[0]
+        // serviceInfo = res.data.data.data[0]
+        var s = res.data.data.data
+
         that.setData({
-          serviceInfo
+          serviceInfo: s.length>0?s[0]:{}
         })
       }
     };

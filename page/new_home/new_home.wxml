@@ -151,18 +151,18 @@
       <image src='../../image/ours/logo.png'></image>
     </view>
     <view class='aboutUs-des' wx:if="{{language == 'zh'}}">
-      <view class='aboutUs-des_header'>{{serviceInfo?serviceInfo.goods_name:''}}</view>
+      <view class='aboutUs-des_header'>{{serviceInfo.goods_name?serviceInfo.goods_name:''}}</view>
       <view class='aboutUs-des_content'>
-        <text>{{serviceInfo?serviceInfo.content:''}}</text>
+        <text>{{serviceInfo.content?serviceInfo.content:''}}</text>
       </view>
       <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
       <text>{{configInfo.en_aboutus}}</text>
     </view> -->
     </view>
     <view class='aboutUs-des' wx:if="{{language == 'en'}}">
-      <view class='aboutUs-des_header'>{{serviceInfo?serviceInfo.en_goods_name:''}}</view>
+      <view class='aboutUs-des_header'>{{serviceInfo.en_goods_name?serviceInfo.en_goods_name:''}}</view>
       <view class='aboutUs-des_content'>
-        <text>{{serviceInfo?serviceInfo.en_content:''}}</text>
+        <text>{{serviceInfo.en_content?serviceInfo.en_content:''}}</text>
       </view>
       <!-- <view class='aboutUs-des_content' wx:if="{{language == 'en'}}">
       <text>{{configInfo.en_aboutus}}</text>
